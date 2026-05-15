@@ -17,6 +17,8 @@ namespace Welow\RRHH;
 use Welow\RRHH\Audit\AuditLogger;
 use Welow\RRHH\Audit\AuditRepository;
 use Welow\RRHH\Database\Migrator;
+use Welow\RRHH\Employees\EmployeeRepository;
+use Welow\RRHH\Employees\EmployeeService;
 use Welow\RRHH\Modules\ModuleRegistry;
 
 defined( 'ABSPATH' ) || exit;
@@ -146,6 +148,24 @@ final class Plugin {
 			'audit.logger',
 			static function ( Container $c ): AuditLogger {
 				return new AuditLogger( $c->get( 'audit.repository' ) );
+			}
+		);
+
+		$this->container->set(
+			'employees.repository',
+			static function (): EmployeeRepository {
+				global $wpdb;
+				return new EmployeeRepository( $wpdb );
+			}
+		);
+
+		$this->container->set(
+			'employees.service',
+			static function ( Container $c ): EmployeeService {
+				return new EmployeeService(
+					$c->get( 'employees.repository' ),
+					$c->get( 'audit.logger' )
+				);
 			}
 		);
 	}
