@@ -244,6 +244,9 @@ final class EmployeesImportScreen {
 					<?php esc_html_e( 'Descargar plantilla CSV', 'welow-rrhh' ); ?>
 				</a>
 			</p>
+			<p class="description">
+				<?php esc_html_e( 'La plantilla incluye una fila de ejemplo (ana@example.com). Bórrala y sustitúyela por tus datos antes de importar.', 'welow-rrhh' ); ?>
+			</p>
 
 			<form method="post" enctype="multipart/form-data" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 				<input type="hidden" name="action" value="<?php echo esc_attr( self::UPLOAD_ACTION ); ?>" />

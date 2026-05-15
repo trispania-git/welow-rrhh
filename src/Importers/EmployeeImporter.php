@@ -155,9 +155,23 @@ final class EmployeeImporter {
 			return self::result( $line, self::OUTCOME_ERROR, implode( '; ', $format_errors ), $row );
 		}
 
+		// Aviso (no bloqueante) si manager_email viene pero no resuelve.
+		$manager_warning = '';
+		if ( ! empty( $row['manager_email'] ) ) {
+			$mgr_user = get_user_by( 'email', sanitize_email( (string) $row['manager_email'] ) );
+			if ( false === $mgr_user ) {
+				$manager_warning = ' ' . __( '(aviso: manager_email no encontrado, se crea sin manager)', 'welow-rrhh' );
+			}
+		}
+
 		$existing_user_id = email_exists( $email );
 		if ( false === $existing_user_id ) {
-			return self::result( $line, self::OUTCOME_CREATE, __( 'Creará usuario WP nuevo y empleado.', 'welow-rrhh' ), $row );
+			return self::result(
+				$line,
+				self::OUTCOME_CREATE,
+				__( 'Creará usuario WP nuevo y empleado.', 'welow-rrhh' ) . $manager_warning,
+				$row
+			);
 		}
 
 		$existing_employee = $this->repository->find_by_user_id( (int) $existing_user_id );
@@ -172,7 +186,12 @@ final class EmployeeImporter {
 		}
 
 		return array_merge(
-			self::result( $line, self::OUTCOME_LINK_EXISTING, __( 'Vinculará el usuario WP existente al nuevo empleado.', 'welow-rrhh' ), $row ),
+			self::result(
+				$line,
+				self::OUTCOME_LINK_EXISTING,
+				__( 'Vinculará el usuario WP existente al nuevo empleado.', 'welow-rrhh' ) . $manager_warning,
+				$row
+			),
 			array( 'user_id' => (int) $existing_user_id )
 		);
 	}
@@ -253,12 +272,8 @@ final class EmployeeImporter {
 				$errors[] = __( 'vacation_days_override fuera de rango', 'welow-rrhh' );
 			}
 		}
-		if ( ! empty( $row['manager_email'] ) ) {
-			$mgr = get_user_by( 'email', sanitize_email( (string) $row['manager_email'] ) );
-			if ( false === $mgr ) {
-				$errors[] = __( 'manager_email no encontrado entre los usuarios de WordPress', 'welow-rrhh' );
-			}
-		}
+		// manager_email no se valida aquí (no es bloqueante). Si no resuelve, el
+		// empleado se crea sin manager y se anota como warning en analyze_row().
 
 		return $errors;
 	}

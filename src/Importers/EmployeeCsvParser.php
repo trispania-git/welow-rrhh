@@ -178,15 +178,18 @@ final class EmployeeCsvParser {
 	 */
 	public static function template_content(): string {
 		$header = array_merge( self::REQUIRED_COLUMNS, self::OPTIONAL_COLUMNS );
+		// Ejemplo con dominio example.com (RFC 2606, reservado para documentación)
+		// y manager_email vacío para que la plantilla pueda usarse sin generar
+		// referencias a usuarios inexistentes.
 		$sample = array(
-			'ana@empresa.com',
+			'ana@example.com',
 			'Ana',
 			'García López',
 			'12345678Z',
 			'EMP001',
 			'Marketing',
 			'Diseñadora',
-			'manager@empresa.com',
+			'',
 			'2024-09-01',
 			'40',
 			'22',
