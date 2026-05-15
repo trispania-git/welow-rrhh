@@ -1,0 +1,38 @@
+/* Welow RRHH — estilos admin */
+
+.welow-rrhh__status {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.welow-rrhh__status--active {
+	background: #d1fae5;
+	color: #065f46;
+}
+
+.welow-rrhh__status--inactive {
+	background: #e5e7eb;
+	color: #374151;
+}
+
+.welow-rrhh__status--on_leave {
+	background: #dbeafe;
+	color: #1e40af;
+}
+
+.welow-rrhh__form .required {
+	color: #b91c1c;
+}
+
+.welow-rrhh__form input[type="text"],
+.welow-rrhh__form input[type="email"],
+.welow-rrhh__form input[type="number"],
+.welow-rrhh__form input[type="date"],
+.welow-rrhh__form select {
+	max-width: 400px;
+}

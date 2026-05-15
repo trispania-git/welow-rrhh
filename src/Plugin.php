@@ -14,6 +14,7 @@ declare( strict_types=1 );
 
 namespace Welow\RRHH;
 
+use Welow\RRHH\Admin\AdminBootstrap;
 use Welow\RRHH\Audit\AuditLogger;
 use Welow\RRHH\Audit\AuditRepository;
 use Welow\RRHH\Database\Migrator;
@@ -99,6 +100,7 @@ final class Plugin {
 		$this->register_core_services();
 		$this->run_migrations();
 		$this->load_textdomain();
+		$this->boot_admin();
 		$this->boot_modules();
 
 		$this->booted = true;
@@ -196,6 +198,19 @@ final class Plugin {
 			false,
 			dirname( WELOW_RRHH_PLUGIN_BASENAME ) . '/languages'
 		);
+	}
+
+	/**
+	 * Inicializa el backend (wp-admin) si estamos en ese contexto.
+	 *
+	 * @return void
+	 */
+	private function boot_admin(): void {
+		if ( ! is_admin() ) {
+			return;
+		}
+		$bootstrap = new AdminBootstrap( $this->container );
+		$bootstrap->register_hooks();
 	}
 
 	/**
