@@ -1,0 +1,22 @@
+# Normalización de saltos de línea cross-platform.
+# WordPress Coding Standards y herramientas Unix esperan LF en el repo.
+
+* text=auto eol=lf
+
+# Binarios (sin normalización).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.mo binary
+
+# Exclusiones del export (cuando alguien descarga un zip del repo).
+/.github          export-ignore
+/tests            export-ignore
+/.gitattributes   export-ignore
+/.gitignore       export-ignore
+/phpcs.xml.dist   export-ignore
+/phpunit.xml.dist export-ignore

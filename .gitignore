@@ -1,0 +1,42 @@
+# Composer
+/vendor/
+composer.phar
+composer.lock
+
+# Node (por si en algún módulo se introduce build de assets)
+/node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Tests / coverage
+/coverage/
+/.phpunit.cache/
+.phpunit.result.cache
+
+# PHPCS
+.phpcs-cache
+phpcs.xml
+phpunit.xml
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Build artefactos
+/build/
+/dist/
+*.zip
+
+# Logs
+*.log
+
+# Local config
+.env
+.env.local
+wp-config-local.php
+
+# Tooling local (no compartido)
+/.claude/
