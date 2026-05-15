@@ -2,12 +2,10 @@
 /**
  * Singleton de bootstrap del plugin Welow RRHH.
  *
- * Arranca el contenedor de servicios mínimo, registra el ModuleRegistry,
- * descubre los módulos disponibles en /modules/ y, en función de la opción
- * `welow_rrhh_active_modules`, llama a `boot()` solo en los activos.
- *
- * El Core (no implementado todavía en este scaffold) se registrará aquí
- * como un servicio más en futuras iteraciones.
+ * Arranca el contenedor de servicios mínimo, ejecuta migraciones si el schema
+ * está desfasado, registra el ModuleRegistry, descubre los módulos disponibles
+ * en /modules/ y, en función de la opción `welow_rrhh_active_modules`, llama
+ * a `boot()` solo en los activos.
  *
  * @package Welow\RRHH
  */
@@ -16,6 +14,9 @@ declare( strict_types=1 );
 
 namespace Welow\RRHH;
 
+use Welow\RRHH\Audit\AuditLogger;
+use Welow\RRHH\Audit\AuditRepository;
+use Welow\RRHH\Database\Migrator;
 use Welow\RRHH\Modules\ModuleRegistry;
 
 defined( 'ABSPATH' ) || exit;
@@ -94,6 +95,7 @@ final class Plugin {
 		}
 
 		$this->register_core_services();
+		$this->run_migrations();
 		$this->load_textdomain();
 		$this->boot_modules();
 
@@ -124,12 +126,47 @@ final class Plugin {
 				return new ModuleRegistry( WELOW_RRHH_PLUGIN_DIR . 'modules' );
 			}
 		);
+
+		$this->container->set(
+			'migrator',
+			static function (): Migrator {
+				return new Migrator();
+			}
+		);
+
+		$this->container->set(
+			'audit.repository',
+			static function (): AuditRepository {
+				global $wpdb;
+				return new AuditRepository( $wpdb );
+			}
+		);
+
+		$this->container->set(
+			'audit.logger',
+			static function ( Container $c ): AuditLogger {
+				return new AuditLogger( $c->get( 'audit.repository' ) );
+			}
+		);
+	}
+
+	/**
+	 * Ejecuta migraciones del schema Core si la versión instalada está desfasada.
+	 *
+	 * Idempotente: si la versión coincide no se ejecuta nada.
+	 *
+	 * @return void
+	 */
+	private function run_migrations(): void {
+		/** @var Migrator $migrator */
+		$migrator = $this->container->get( 'migrator' );
+		$migrator->run_if_needed();
 	}
 
 	/**
 	 * Carga la traducción del plugin.
 	 *
-	 * Los módulos cargarán sus propios .mo desde /modules/<slug>/languages/
+	 * Los módulos cargan sus propios .mo desde /modules/<slug>/languages/
 	 * en su método boot().
 	 *
 	 * @return void
