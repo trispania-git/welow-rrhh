@@ -12,6 +12,19 @@
 	<exclude-pattern>*/assets/vendor/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
 
+	<!-- En archivos de plantilla (incluidos vía OB capture dentro de un closure)
+	     las "globals" son en realidad locales del método incluyente. WPCS no
+	     puede distinguir el contexto, así que relajamos esas dos sniffs en las
+	     carpetas de templates. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<exclude-pattern>*/templates/emails/*</exclude-pattern>
+		<exclude-pattern>*/src/Frontend/templates/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.WP.GlobalVariablesOverride">
+		<exclude-pattern>*/templates/emails/*</exclude-pattern>
+		<exclude-pattern>*/src/Frontend/templates/*</exclude-pattern>
+	</rule>
+
 	<arg name="extensions" value="php"/>
 	<arg name="colors"/>
 	<arg name="parallel" value="8"/>

@@ -13,6 +13,7 @@ declare( strict_types=1 );
 namespace Welow\RRHH;
 
 use Welow\RRHH\Database\Schema;
+use Welow\RRHH\Frontend\Frontend;
 use Welow\RRHH\Roles\Capabilities;
 use Welow\RRHH\Settings\CompanySettings;
 
@@ -37,6 +38,7 @@ final class Activator {
 		Schema::install();
 		Capabilities::install();
 		self::seed_options();
+		Frontend::ensure_dashboard_page();
 
 		flush_rewrite_rules( false );
 	}

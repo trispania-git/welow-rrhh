@@ -22,6 +22,9 @@ use Welow\RRHH\Departments\DepartmentRepository;
 use Welow\RRHH\Departments\DepartmentService;
 use Welow\RRHH\Employees\EmployeeRepository;
 use Welow\RRHH\Employees\EmployeeService;
+use Welow\RRHH\Frontend\Dashboard;
+use Welow\RRHH\Frontend\Tabs\NotificationsTab;
+use Welow\RRHH\Frontend\Tabs\SummaryTab;
 use Welow\RRHH\Holidays\HolidayRepository;
 use Welow\RRHH\Holidays\HolidayService;
 use Welow\RRHH\Importers\EmployeeImporter;
@@ -113,6 +116,7 @@ final class Plugin {
 		$this->run_migrations();
 		$this->load_textdomain();
 		$this->boot_admin();
+		$this->boot_frontend();
 		$this->boot_modules();
 
 		$this->booted = true;
@@ -274,6 +278,27 @@ final class Plugin {
 				return new Dispatcher( array( $email, $in_app ) );
 			}
 		);
+
+		$this->container->set(
+			'frontend.dashboard',
+			static function ( Container $c ): Dashboard {
+				$tabs = array(
+					new SummaryTab(
+						$c->get( 'employees.repository' ),
+						$c->get( 'departments.repository' )
+					),
+					new NotificationsTab( $c->get( 'notifications.repository' ) ),
+				);
+				return new Dashboard( $tabs );
+			}
+		);
+
+		$this->container->set(
+			'frontend',
+			static function ( Container $c ): \Welow\RRHH\Frontend\Frontend {
+				return new \Welow\RRHH\Frontend\Frontend( $c->get( 'frontend.dashboard' ) );
+			}
+		);
 	}
 
 	/**
@@ -315,6 +340,18 @@ final class Plugin {
 		}
 		$bootstrap = new AdminBootstrap( $this->container );
 		$bootstrap->register_hooks();
+	}
+
+	/**
+	 * Inicializa el frontend (shortcodes + assets) en cualquier contexto.
+	 *
+	 * Los shortcodes deben registrarse también en admin (para previews del editor).
+	 *
+	 * @return void
+	 */
+	private function boot_frontend(): void {
+		$frontend = $this->container->get( 'frontend' );
+		$frontend->register_hooks();
 	}
 
 	/**

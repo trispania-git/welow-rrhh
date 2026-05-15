@@ -1,0 +1,204 @@
+/* Welow RRHH — estilos frontend (BEM con prefijo .welow-rrhh__). */
+
+.welow-rrhh__dashboard {
+	max-width: 960px;
+	margin: 0 auto;
+	font-family: inherit;
+	color: #1d2327;
+}
+
+.welow-rrhh__greeting h2 {
+	margin: 0 0 16px;
+	font-size: 24px;
+}
+
+.welow-rrhh__nav {
+	border-bottom: 1px solid #d9d9d9;
+	margin-bottom: 24px;
+}
+
+.welow-rrhh__nav-list {
+	display: flex;
+	gap: 4px;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.welow-rrhh__nav-item a {
+	display: inline-block;
+	padding: 10px 16px;
+	text-decoration: none;
+	color: #4f4f4f;
+	border-bottom: 3px solid transparent;
+	font-weight: 500;
+}
+
+.welow-rrhh__nav-item a:hover {
+	color: #2271b1;
+}
+
+.welow-rrhh__nav-item--active a,
+.welow-rrhh__nav-item--active a:hover {
+	color: #2271b1;
+	border-bottom-color: #2271b1;
+}
+
+.welow-rrhh__panel {
+	background: #fff;
+	border: 1px solid #e3e3e3;
+	border-radius: 6px;
+	padding: 24px;
+}
+
+.welow-rrhh__panel-title {
+	margin: 0 0 16px;
+	font-size: 18px;
+}
+
+.welow-rrhh__panel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-bottom: 16px;
+}
+
+.welow-rrhh__panel-actions {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.welow-rrhh__badge {
+	display: inline-block;
+	background: #d63638;
+	color: #fff;
+	border-radius: 999px;
+	padding: 2px 8px;
+	font-size: 12px;
+	margin-left: 6px;
+	vertical-align: middle;
+}
+
+.welow-rrhh__link {
+	color: #2271b1;
+	text-decoration: none;
+}
+
+.welow-rrhh__link:hover {
+	text-decoration: underline;
+}
+
+.welow-rrhh__link--active {
+	font-weight: 600;
+}
+
+.welow-rrhh__button {
+	display: inline-block;
+	padding: 8px 16px;
+	background: #2271b1;
+	color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+}
+
+.welow-rrhh__button:hover {
+	background: #135e96;
+}
+
+.welow-rrhh__notice {
+	padding: 12px 16px;
+	border-radius: 4px;
+	border: 1px solid;
+}
+
+.welow-rrhh__notice--info {
+	background: #f0f6fc;
+	border-color: #c5dceb;
+	color: #1d2327;
+}
+
+.welow-rrhh__notice--warning {
+	background: #fcf9e8;
+	border-color: #f0e4a3;
+	color: #443a01;
+}
+
+.welow-rrhh__data-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 16px;
+	margin: 0;
+}
+
+.welow-rrhh__data-row dt {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #757575;
+	margin: 0 0 4px;
+}
+
+.welow-rrhh__data-row dd {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.welow-rrhh__hint {
+	margin-top: 24px;
+	font-size: 13px;
+	color: #777;
+	font-style: italic;
+}
+
+/* Notifications */
+
+.welow-rrhh__notification-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.welow-rrhh__notification {
+	padding: 12px 16px;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.welow-rrhh__notification--unread {
+	border-left: 3px solid #2271b1;
+	background: #f7fbfe;
+}
+
+.welow-rrhh__notification-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 16px;
+}
+
+.welow-rrhh__notification-title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.welow-rrhh__notification-time {
+	font-size: 12px;
+	color: #777;
+	white-space: nowrap;
+}
+
+.welow-rrhh__notification-body {
+	margin: 6px 0 8px;
+	font-size: 14px;
+	color: #333;
+}
