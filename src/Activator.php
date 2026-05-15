@@ -66,5 +66,10 @@ final class Activator {
 		);
 		add_option( CompanySettings::OPTION_KEY, CompanySettings::defaults(), '', 'yes' );
 		add_option( 'welow_rrhh_remove_data_on_uninstall', false, '', 'no' );
+
+		// Marca para redirigir al wizard en el siguiente request admin (§6.1).
+		// El transient se autoborra en WizardScreen::maybe_redirect_after_activation()
+		// tras la primera lectura. TTL corto para no atrapar al admin más adelante.
+		set_transient( 'welow_rrhh_activation_redirect', '1', 5 * MINUTE_IN_SECONDS );
 	}
 }

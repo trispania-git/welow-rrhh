@@ -82,6 +82,13 @@ final class AdminBootstrap {
 	private ?SettingsScreen $settings_screen = null;
 
 	/**
+	 * Wizard (resuelto perezosamente).
+	 *
+	 * @var WizardScreen|null
+	 */
+	private ?WizardScreen $wizard_screen = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Container $container Contenedor del plugin.
@@ -105,6 +112,8 @@ final class AdminBootstrap {
 		add_action( 'admin_post_' . HolidaysImportScreen::UPLOAD_ACTION, array( $this, 'handle_holidays_csv_upload' ) );
 		add_action( 'admin_post_' . HolidaysImportScreen::CONFIRM_ACTION, array( $this, 'handle_holidays_csv_confirm' ) );
 		add_action( 'admin_post_' . SettingsScreen::SAVE_ACTION, array( $this, 'handle_settings_save' ) );
+		add_action( 'admin_post_' . WizardScreen::SAVE_ACTION, array( $this, 'handle_wizard_save' ) );
+		add_action( 'admin_init', array( $this, 'maybe_redirect_to_wizard' ), 5 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
@@ -202,6 +211,16 @@ final class AdminBootstrap {
 		if ( $settings_hook ) {
 			add_action( 'admin_notices', array( $this->settings_screen(), 'render_notices' ) );
 		}
+
+		// El wizard se registra como página oculta (sin entrada en el menú lateral).
+		add_submenu_page(
+			'',
+			__( 'Asistente de configuración', 'welow-rrhh' ),
+			__( 'Asistente de configuración', 'welow-rrhh' ),
+			Capabilities::CAP_MANAGE_PLUGIN,
+			WizardScreen::PAGE_SLUG,
+			array( $this->wizard_screen(), 'render' )
+		);
 	}
 
 	/**
@@ -274,6 +293,24 @@ final class AdminBootstrap {
 	 */
 	public function handle_settings_save(): void {
 		$this->settings_screen()->handle_post_save();
+	}
+
+	/**
+	 * Handler POST del wizard.
+	 *
+	 * @return void
+	 */
+	public function handle_wizard_save(): void {
+		$this->wizard_screen()->handle_post_save();
+	}
+
+	/**
+	 * Engancha en admin_init para redirigir al wizard tras activación.
+	 *
+	 * @return void
+	 */
+	public function maybe_redirect_to_wizard(): void {
+		$this->wizard_screen()->maybe_redirect_after_activation();
 	}
 
 	/**
@@ -368,5 +405,17 @@ final class AdminBootstrap {
 			$this->settings_screen = new SettingsScreen( $this->container->get( 'settings.company' ) );
 		}
 		return $this->settings_screen;
+	}
+
+	/**
+	 * Resolución perezosa del Wizard.
+	 *
+	 * @return WizardScreen
+	 */
+	private function wizard_screen(): WizardScreen {
+		if ( null === $this->wizard_screen ) {
+			$this->wizard_screen = new WizardScreen( $this->container->get( 'settings.company' ) );
+		}
+		return $this->wizard_screen;
 	}
 }
