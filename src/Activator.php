@@ -14,6 +14,7 @@ namespace Welow\RRHH;
 
 use Welow\RRHH\Database\Schema;
 use Welow\RRHH\Roles\Capabilities;
+use Welow\RRHH\Settings\CompanySettings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -63,64 +64,7 @@ final class Activator {
 			'',
 			'yes'
 		);
-		add_option( 'welow_rrhh_company_settings', self::default_company_settings(), '', 'yes' );
+		add_option( CompanySettings::OPTION_KEY, CompanySettings::defaults(), '', 'yes' );
 		add_option( 'welow_rrhh_remove_data_on_uninstall', false, '', 'no' );
-	}
-
-	/**
-	 * Esquema por defecto de `welow_rrhh_company_settings`.
-	 *
-	 * Refleja la estructura JSON descrita en §4.4 de la especificación.
-	 * Las pantallas de ajustes (hito Settings) iterarán sobre esta forma.
-	 *
-	 * @return array<string, mixed>
-	 */
-	private static function default_company_settings(): array {
-		return array(
-			'company'       => array(
-				'name'               => '',
-				'cif'                => '',
-				'address'            => '',
-				'logo_attachment_id' => null,
-			),
-			'calendar'      => array(
-				'timezone'          => 'Europe/Madrid',
-				'first_day_of_week' => 1,
-				'ccaa'              => 'ES-MD',
-			),
-			'vacations'     => array(
-				'default_days_per_year'   => 22,
-				'computation'             => 'working_days',
-				'allow_carry_over'        => true,
-				'carry_over_max_days'     => 5,
-				'carry_over_deadline'     => '03-31',
-				'approval_flow'           => array(
-					array(
-						'level' => 1,
-						'role'  => 'manager_direct',
-					),
-					array(
-						'level' => 2,
-						'role'  => 'hr',
-					),
-				),
-				'min_request_notice_days' => 7,
-				'max_consecutive_days'    => 30,
-			),
-			'time_tracking' => array(
-				'require_geo'                 => false,
-				'require_ip_allowlist'        => false,
-				'ip_allowlist'                => array(),
-				'geo_radius_meters'           => 200,
-				'office_locations'            => array(),
-				'auto_close_month_day'        => 5,
-				'max_daily_hours_warning'     => 10,
-				'mandatory_break_after_hours' => 6,
-			),
-			'notifications' => array(
-				'email_from_name'    => '',
-				'email_from_address' => '',
-			),
-		);
 	}
 }

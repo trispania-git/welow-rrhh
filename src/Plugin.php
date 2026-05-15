@@ -27,6 +27,7 @@ use Welow\RRHH\Holidays\HolidayService;
 use Welow\RRHH\Importers\EmployeeImporter;
 use Welow\RRHH\Importers\HolidayImporter;
 use Welow\RRHH\Modules\ModuleRegistry;
+use Welow\RRHH\Settings\CompanySettings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -232,6 +233,13 @@ final class Plugin {
 					$c->get( 'holidays.repository' ),
 					$c->get( 'audit.logger' )
 				);
+			}
+		);
+
+		$this->container->set(
+			'settings.company',
+			static function (): CompanySettings {
+				return new CompanySettings();
 			}
 		);
 	}

@@ -75,6 +75,13 @@ final class AdminBootstrap {
 	private ?HolidaysImportScreen $holidays_import_screen = null;
 
 	/**
+	 * Pantalla de Ajustes (resuelta perezosamente).
+	 *
+	 * @var SettingsScreen|null
+	 */
+	private ?SettingsScreen $settings_screen = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Container $container Contenedor del plugin.
@@ -97,6 +104,7 @@ final class AdminBootstrap {
 		add_action( 'admin_post_' . HolidaysScreen::SAVE_ACTION, array( $this, 'handle_holiday_save' ) );
 		add_action( 'admin_post_' . HolidaysImportScreen::UPLOAD_ACTION, array( $this, 'handle_holidays_csv_upload' ) );
 		add_action( 'admin_post_' . HolidaysImportScreen::CONFIRM_ACTION, array( $this, 'handle_holidays_csv_confirm' ) );
+		add_action( 'admin_post_' . SettingsScreen::SAVE_ACTION, array( $this, 'handle_settings_save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
@@ -181,6 +189,19 @@ final class AdminBootstrap {
 		if ( $holidays_import_hook ) {
 			add_action( 'load-' . $holidays_import_hook, array( $this->holidays_import_screen(), 'handle_actions' ) );
 		}
+
+		$settings_hook = add_submenu_page(
+			EmployeesScreen::PAGE_SLUG,
+			__( 'Ajustes Welow RRHH', 'welow-rrhh' ),
+			__( 'Ajustes', 'welow-rrhh' ),
+			Capabilities::CAP_MANAGE_PLUGIN,
+			SettingsScreen::PAGE_SLUG,
+			array( $this->settings_screen(), 'render' )
+		);
+
+		if ( $settings_hook ) {
+			add_action( 'admin_notices', array( $this->settings_screen(), 'render_notices' ) );
+		}
 	}
 
 	/**
@@ -244,6 +265,15 @@ final class AdminBootstrap {
 	 */
 	public function handle_holidays_csv_confirm(): void {
 		$this->holidays_import_screen()->handle_confirm();
+	}
+
+	/**
+	 * Handler del POST de save de Settings (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_settings_save(): void {
+		$this->settings_screen()->handle_post_save();
 	}
 
 	/**
@@ -326,5 +356,17 @@ final class AdminBootstrap {
 			$this->holidays_import_screen = new HolidaysImportScreen( $this->container->get( 'holidays.importer' ) );
 		}
 		return $this->holidays_import_screen;
+	}
+
+	/**
+	 * Resolución perezosa de la pantalla de Ajustes.
+	 *
+	 * @return SettingsScreen
+	 */
+	private function settings_screen(): SettingsScreen {
+		if ( null === $this->settings_screen ) {
+			$this->settings_screen = new SettingsScreen( $this->container->get( 'settings.company' ) );
+		}
+		return $this->settings_screen;
 	}
 }
