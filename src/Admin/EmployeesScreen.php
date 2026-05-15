@@ -13,6 +13,7 @@ declare( strict_types=1 );
 
 namespace Welow\RRHH\Admin;
 
+use Welow\RRHH\Departments\DepartmentRepository;
 use Welow\RRHH\Employees\EmployeeService;
 use Welow\RRHH\Roles\Capabilities;
 use Welow\RRHH\Support\Data\Employee;
@@ -37,12 +38,21 @@ final class EmployeesScreen {
 	private EmployeeService $service;
 
 	/**
+	 * Repositorio de departamentos (para poblar el dropdown del form).
+	 *
+	 * @var DepartmentRepository
+	 */
+	private DepartmentRepository $departments;
+
+	/**
 	 * Constructor.
 	 *
-	 * @param EmployeeService $service Servicio.
+	 * @param EmployeeService      $service     Servicio de empleados.
+	 * @param DepartmentRepository $departments Repositorio de departamentos.
 	 */
-	public function __construct( EmployeeService $service ) {
-		$this->service = $service;
+	public function __construct( EmployeeService $service, DepartmentRepository $departments ) {
+		$this->service     = $service;
+		$this->departments = $departments;
 	}
 
 	/**
@@ -114,6 +124,7 @@ final class EmployeesScreen {
 			'dni_nie'                => isset( $post['dni_nie'] ) ? (string) $post['dni_nie'] : '',
 			'employee_code'          => isset( $post['employee_code'] ) ? (string) $post['employee_code'] : '',
 			'position'               => isset( $post['position'] ) ? (string) $post['position'] : '',
+			'department_id'          => isset( $post['department_id'] ) ? (string) $post['department_id'] : '',
 			'manager_user_id'        => isset( $post['manager_user_id'] ) ? (string) $post['manager_user_id'] : '',
 			'hire_date'              => isset( $post['hire_date'] ) ? (string) $post['hire_date'] : '',
 			'weekly_hours'           => isset( $post['weekly_hours'] ) ? (string) $post['weekly_hours'] : '',
@@ -323,6 +334,12 @@ final class EmployeesScreen {
 							</td>
 						</tr>
 						<tr>
+							<th scope="row"><label for="welow-department"><?php esc_html_e( 'Departamento', 'welow-rrhh' ); ?></label></th>
+							<td>
+								<?php $this->render_department_dropdown( $is_edit ? $employee->department_id : null ); ?>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row"><label for="welow-manager"><?php esc_html_e( 'Manager directo', 'welow-rrhh' ); ?></label></th>
 							<td>
 								<?php $this->render_manager_dropdown( $is_edit ? $employee->manager_user_id : null ); ?>
@@ -376,6 +393,27 @@ final class EmployeesScreen {
 			</form>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Imprime un <select> con los departamentos disponibles.
+	 *
+	 * @param int|null $selected_id ID del departamento seleccionado.
+	 * @return void
+	 */
+	private function render_department_dropdown( ?int $selected_id ): void {
+		$all = $this->departments->find_all();
+		echo '<select id="welow-department" name="department_id">';
+		echo '<option value="">' . esc_html__( '— Sin departamento —', 'welow-rrhh' ) . '</option>';
+		foreach ( $all as $dep ) {
+			printf(
+				'<option value="%d" %s>%s</option>',
+				(int) $dep->id,
+				selected( $selected_id, (int) $dep->id, false ),
+				esc_html( $dep->name )
+			);
+		}
+		echo '</select>';
 	}
 
 	/**

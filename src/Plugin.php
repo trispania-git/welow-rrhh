@@ -18,6 +18,8 @@ use Welow\RRHH\Admin\AdminBootstrap;
 use Welow\RRHH\Audit\AuditLogger;
 use Welow\RRHH\Audit\AuditRepository;
 use Welow\RRHH\Database\Migrator;
+use Welow\RRHH\Departments\DepartmentRepository;
+use Welow\RRHH\Departments\DepartmentService;
 use Welow\RRHH\Employees\EmployeeRepository;
 use Welow\RRHH\Employees\EmployeeService;
 use Welow\RRHH\Importers\EmployeeImporter;
@@ -178,6 +180,24 @@ final class Plugin {
 				return new EmployeeImporter(
 					$c->get( 'employees.service' ),
 					$c->get( 'employees.repository' ),
+					$c->get( 'audit.logger' )
+				);
+			}
+		);
+
+		$this->container->set(
+			'departments.repository',
+			static function (): DepartmentRepository {
+				global $wpdb;
+				return new DepartmentRepository( $wpdb );
+			}
+		);
+
+		$this->container->set(
+			'departments.service',
+			static function ( Container $c ): DepartmentService {
+				return new DepartmentService(
+					$c->get( 'departments.repository' ),
 					$c->get( 'audit.logger' )
 				);
 			}

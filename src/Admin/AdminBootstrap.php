@@ -54,6 +54,13 @@ final class AdminBootstrap {
 	private ?EmployeesImportScreen $import_screen = null;
 
 	/**
+	 * Pantalla de departamentos (resuelta perezosamente).
+	 *
+	 * @var DepartmentsScreen|null
+	 */
+	private ?DepartmentsScreen $departments_screen = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Container $container Contenedor del plugin.
@@ -72,6 +79,7 @@ final class AdminBootstrap {
 		add_action( 'admin_post_' . EmployeesScreen::SAVE_ACTION, array( $this, 'handle_post_save' ) );
 		add_action( 'admin_post_' . EmployeesImportScreen::UPLOAD_ACTION, array( $this, 'handle_csv_upload' ) );
 		add_action( 'admin_post_' . EmployeesImportScreen::CONFIRM_ACTION, array( $this, 'handle_csv_confirm' ) );
+		add_action( 'admin_post_' . DepartmentsScreen::SAVE_ACTION, array( $this, 'handle_department_save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
@@ -117,6 +125,20 @@ final class AdminBootstrap {
 		if ( $import_hook ) {
 			add_action( 'load-' . $import_hook, array( $this->import_screen(), 'handle_actions' ) );
 		}
+
+		$departments_hook = add_submenu_page(
+			EmployeesScreen::PAGE_SLUG,
+			__( 'Departamentos', 'welow-rrhh' ),
+			__( 'Departamentos', 'welow-rrhh' ),
+			Capabilities::CAP_MANAGE_EMPLOYEES,
+			DepartmentsScreen::PAGE_SLUG,
+			array( $this->departments_screen(), 'render' )
+		);
+
+		if ( $departments_hook ) {
+			add_action( 'load-' . $departments_hook, array( $this->departments_screen(), 'handle_actions' ) );
+			add_action( 'admin_notices', array( $this->departments_screen(), 'render_notices' ) );
+		}
 	}
 
 	/**
@@ -147,6 +169,15 @@ final class AdminBootstrap {
 	}
 
 	/**
+	 * Handler del POST de save de departamento (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_department_save(): void {
+		$this->departments_screen()->handle_post_save();
+	}
+
+	/**
 	 * Encola CSS admin sólo en las páginas del plugin.
 	 *
 	 * @param string $hook_suffix Suffix del current screen.
@@ -172,7 +203,10 @@ final class AdminBootstrap {
 	 */
 	private function employees_screen(): EmployeesScreen {
 		if ( null === $this->employees_screen ) {
-			$this->employees_screen = new EmployeesScreen( $this->container->get( 'employees.service' ) );
+			$this->employees_screen = new EmployeesScreen(
+				$this->container->get( 'employees.service' ),
+				$this->container->get( 'departments.repository' )
+			);
 		}
 		return $this->employees_screen;
 	}
@@ -187,5 +221,17 @@ final class AdminBootstrap {
 			$this->import_screen = new EmployeesImportScreen( $this->container->get( 'employees.importer' ) );
 		}
 		return $this->import_screen;
+	}
+
+	/**
+	 * Resolución perezosa de la pantalla de departamentos.
+	 *
+	 * @return DepartmentsScreen
+	 */
+	private function departments_screen(): DepartmentsScreen {
+		if ( null === $this->departments_screen ) {
+			$this->departments_screen = new DepartmentsScreen( $this->container->get( 'departments.service' ) );
+		}
+		return $this->departments_screen;
 	}
 }
