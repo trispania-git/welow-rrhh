@@ -50,15 +50,13 @@ abstract class AbstractRepository {
 	 */
 	public function find( int $id ): ?array {
 		$table = $this->table();
-		// Phpcs ignora el placeholder de tabla — está controlado por la subclase y no proviene de entrada de usuario.
-		$row = $this->wpdb->get_row(
-			$this->wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				"SELECT * FROM {$table} WHERE id = %d LIMIT 1",
-				$id
-			),
-			ARRAY_A
-		);
+		// $table proviene de table() de la subclase (constante interna, no input externo),
+		// y $id se pasa como placeholder %d a $wpdb->prepare(). Es seguro interpolar el
+		// nombre de tabla y la consulta se prepara correctamente.
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$sql = $this->wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d LIMIT 1", $id );
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$row = $this->wpdb->get_row( $sql, ARRAY_A );
 		return is_array( $row ) ? $row : null;
 	}
 

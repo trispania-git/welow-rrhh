@@ -158,7 +158,6 @@ final class Plugin {
 	 * @return void
 	 */
 	private function run_migrations(): void {
-		/** @var Migrator $migrator */
 		$migrator = $this->container->get( 'migrator' );
 		$migrator->run_if_needed();
 	}
@@ -185,7 +184,6 @@ final class Plugin {
 	 * @return void
 	 */
 	private function boot_modules(): void {
-		/** @var ModuleRegistry $registry */
 		$registry = $this->container->get( 'modules' );
 		$registry->discover();
 		$registry->boot_active();

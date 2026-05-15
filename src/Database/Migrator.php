@@ -35,7 +35,7 @@ final class Migrator {
 	 */
 	public function run_if_needed(): void {
 		$installed = (string) get_option( 'welow_rrhh_db_version', '' );
-		if ( $installed === Schema::VERSION ) {
+		if ( Schema::VERSION === $installed ) {
 			return;
 		}
 

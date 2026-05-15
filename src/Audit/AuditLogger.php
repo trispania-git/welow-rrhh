@@ -42,11 +42,11 @@ final class AuditLogger {
 	 * El actor se infiere del usuario logueado salvo que se pase explícito
 	 * (útil para procesos en background / WP-Cron, donde no hay usuario).
 	 *
-	 * @param string           $action        Acción semántica (create, update, delete, approve, reject…).
-	 * @param string           $entity_type   Tipo de entidad afectada.
-	 * @param int|null         $entity_id     ID de la entidad afectada (null si no aplica).
+	 * @param string            $action        Acción semántica (create, update, delete, approve, reject…).
+	 * @param string            $entity_type   Tipo de entidad afectada.
+	 * @param int|null          $entity_id     ID de la entidad afectada (null si no aplica).
 	 * @param array<mixed>|null $diff         Diff antes/después u objeto contextual.
-	 * @param int|null         $actor_user_id Forzar actor (opcional).
+	 * @param int|null          $actor_user_id Forzar actor (opcional).
 	 * @return int|null Id de la entrada o null si falló.
 	 */
 	public function log(

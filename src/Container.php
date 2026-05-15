@@ -75,7 +75,7 @@ class Container {
 
 		if ( ! array_key_exists( $id, $this->bindings ) ) {
 			throw new \RuntimeException(
-				sprintf( 'Servicio no registrado en el contenedor: "%s".', $id )
+				sprintf( 'Servicio no registrado en el contenedor: "%s".', esc_html( $id ) )
 			);
 		}
 

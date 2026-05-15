@@ -26,14 +26,23 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Module extends AbstractModule {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function slug(): string {
 		return 'skeleton';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function name(): string {
 		return __( 'Skeleton', 'welow-rrhh' );
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function description(): string {
 		return __(
 			'Módulo de ejemplo que valida el ciclo de vida del sistema de módulos. No habilitar en producción.',
@@ -41,6 +50,9 @@ final class Module extends AbstractModule {
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function version(): string {
 		return '0.1.0';
 	}

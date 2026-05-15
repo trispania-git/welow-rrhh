@@ -85,7 +85,7 @@ final class Schema {
 		// Como utf8mb4_unicode_520_ci está disponible en MySQL 5.6+/MariaDB 10+,
 		// nos alineamos con los requisitos declarados (§1).
 		if ( false !== stripos( $wp_charset_collate, 'utf8mb4' ) ) {
-			return "DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci";
+			return 'DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci';
 		}
 
 		return $wp_charset_collate;

@@ -76,18 +76,18 @@ final class Activator {
 	 */
 	private static function default_company_settings(): array {
 		return array(
-			'company'        => array(
-				'name'                => '',
-				'cif'                 => '',
-				'address'             => '',
-				'logo_attachment_id'  => null,
+			'company'       => array(
+				'name'               => '',
+				'cif'                => '',
+				'address'            => '',
+				'logo_attachment_id' => null,
 			),
-			'calendar'       => array(
+			'calendar'      => array(
 				'timezone'          => 'Europe/Madrid',
 				'first_day_of_week' => 1,
 				'ccaa'              => 'ES-MD',
 			),
-			'vacations'      => array(
+			'vacations'     => array(
 				'default_days_per_year'   => 22,
 				'computation'             => 'working_days',
 				'allow_carry_over'        => true,
@@ -106,17 +106,17 @@ final class Activator {
 				'min_request_notice_days' => 7,
 				'max_consecutive_days'    => 30,
 			),
-			'time_tracking'  => array(
-				'require_geo'                  => false,
-				'require_ip_allowlist'         => false,
-				'ip_allowlist'                 => array(),
-				'geo_radius_meters'            => 200,
-				'office_locations'             => array(),
-				'auto_close_month_day'         => 5,
-				'max_daily_hours_warning'      => 10,
-				'mandatory_break_after_hours'  => 6,
+			'time_tracking' => array(
+				'require_geo'                 => false,
+				'require_ip_allowlist'        => false,
+				'ip_allowlist'                => array(),
+				'geo_radius_meters'           => 200,
+				'office_locations'            => array(),
+				'auto_close_month_day'        => 5,
+				'max_daily_hours_warning'     => 10,
+				'mandatory_break_after_hours' => 6,
 			),
-			'notifications'  => array(
+			'notifications' => array(
 				'email_from_name'    => '',
 				'email_from_address' => '',
 			),

@@ -30,6 +30,15 @@
 		</properties>
 	</rule>
 
+	<!-- La spec (§2.4 y §16) usa "/" como separador en filtros con namespace simulado
+	     (welow_rrhh/dashboard/tabs, welow_rrhh/notifications/channels, …). Aceptamos el
+	     "/" como delimiter adicional para que WPCS no marque estos nombres. -->
+	<rule ref="WordPress.NamingConventions.ValidHookName">
+		<properties>
+			<property name="additionalWordDelimiters" value="/"/>
+		</properties>
+	</rule>
+
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">

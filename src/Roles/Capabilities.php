@@ -98,22 +98,22 @@ final class Capabilities {
 			self::ROLE_HR       => array(
 				'label' => __( 'RRHH (Welow)', 'welow-rrhh' ),
 				'caps'  => array(
-					'read'                       => true,
-					self::CAP_MANAGE_EMPLOYEES   => true,
-					self::CAP_MANAGE_HOLIDAYS    => true,
-					self::CAP_EXPORT_DATA        => true,
-					self::CAP_VIEW_AUDIT_LOG     => true,
+					'read'                     => true,
+					self::CAP_MANAGE_EMPLOYEES => true,
+					self::CAP_MANAGE_HOLIDAYS  => true,
+					self::CAP_EXPORT_DATA      => true,
+					self::CAP_VIEW_AUDIT_LOG   => true,
 				),
 			),
 			self::ROLE_ADMIN    => array(
 				'label' => __( 'Admin Welow RRHH', 'welow-rrhh' ),
 				'caps'  => array(
-					'read'                       => true,
-					self::CAP_MANAGE_EMPLOYEES   => true,
-					self::CAP_MANAGE_HOLIDAYS    => true,
-					self::CAP_MANAGE_PLUGIN      => true,
-					self::CAP_EXPORT_DATA        => true,
-					self::CAP_VIEW_AUDIT_LOG     => true,
+					'read'                     => true,
+					self::CAP_MANAGE_EMPLOYEES => true,
+					self::CAP_MANAGE_HOLIDAYS  => true,
+					self::CAP_MANAGE_PLUGIN    => true,
+					self::CAP_EXPORT_DATA      => true,
+					self::CAP_VIEW_AUDIT_LOG   => true,
 				),
 			),
 		);

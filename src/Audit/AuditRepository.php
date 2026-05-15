@@ -32,13 +32,13 @@ final class AuditRepository extends AbstractRepository {
 	/**
 	 * Inserta una entrada de auditoría.
 	 *
-	 * @param int|null         $actor_user_id Quién realizó la acción.
-	 * @param string           $entity_type   Tipo de entidad (ej. "time_entry").
-	 * @param int|null         $entity_id     ID de la entidad afectada.
-	 * @param string           $action        Acción (ej. "create", "update", "approve").
+	 * @param int|null          $actor_user_id Quién realizó la acción.
+	 * @param string            $entity_type   Tipo de entidad (ej. "time_entry").
+	 * @param int|null          $entity_id     ID de la entidad afectada.
+	 * @param string            $action        Acción (ej. "create", "update", "approve").
 	 * @param array<mixed>|null $diff         Diff antes/después (se serializa a JSON).
-	 * @param string|null      $ip            IP del actor (IPv6 compatible).
-	 * @param string|null      $user_agent    User-Agent (truncado a 255).
+	 * @param string|null       $ip            IP del actor (IPv6 compatible).
+	 * @param string|null       $user_agent    User-Agent (truncado a 255).
 	 * @return int|false Id de la entrada o false si falló la inserción.
 	 */
 	public function record(
