@@ -22,7 +22,10 @@ use Welow\RRHH\Departments\DepartmentRepository;
 use Welow\RRHH\Departments\DepartmentService;
 use Welow\RRHH\Employees\EmployeeRepository;
 use Welow\RRHH\Employees\EmployeeService;
+use Welow\RRHH\Holidays\HolidayRepository;
+use Welow\RRHH\Holidays\HolidayService;
 use Welow\RRHH\Importers\EmployeeImporter;
+use Welow\RRHH\Importers\HolidayImporter;
 use Welow\RRHH\Modules\ModuleRegistry;
 
 defined( 'ABSPATH' ) || exit;
@@ -198,6 +201,35 @@ final class Plugin {
 			static function ( Container $c ): DepartmentService {
 				return new DepartmentService(
 					$c->get( 'departments.repository' ),
+					$c->get( 'audit.logger' )
+				);
+			}
+		);
+
+		$this->container->set(
+			'holidays.repository',
+			static function (): HolidayRepository {
+				global $wpdb;
+				return new HolidayRepository( $wpdb );
+			}
+		);
+
+		$this->container->set(
+			'holidays.service',
+			static function ( Container $c ): HolidayService {
+				return new HolidayService(
+					$c->get( 'holidays.repository' ),
+					$c->get( 'audit.logger' )
+				);
+			}
+		);
+
+		$this->container->set(
+			'holidays.importer',
+			static function ( Container $c ): HolidayImporter {
+				return new HolidayImporter(
+					$c->get( 'holidays.service' ),
+					$c->get( 'holidays.repository' ),
 					$c->get( 'audit.logger' )
 				);
 			}

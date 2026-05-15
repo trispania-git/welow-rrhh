@@ -61,6 +61,20 @@ final class AdminBootstrap {
 	private ?DepartmentsScreen $departments_screen = null;
 
 	/**
+	 * Pantalla de festivos (resuelta perezosamente).
+	 *
+	 * @var HolidaysScreen|null
+	 */
+	private ?HolidaysScreen $holidays_screen = null;
+
+	/**
+	 * Pantalla de import CSV de festivos (resuelta perezosamente).
+	 *
+	 * @var HolidaysImportScreen|null
+	 */
+	private ?HolidaysImportScreen $holidays_import_screen = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Container $container Contenedor del plugin.
@@ -80,6 +94,9 @@ final class AdminBootstrap {
 		add_action( 'admin_post_' . EmployeesImportScreen::UPLOAD_ACTION, array( $this, 'handle_csv_upload' ) );
 		add_action( 'admin_post_' . EmployeesImportScreen::CONFIRM_ACTION, array( $this, 'handle_csv_confirm' ) );
 		add_action( 'admin_post_' . DepartmentsScreen::SAVE_ACTION, array( $this, 'handle_department_save' ) );
+		add_action( 'admin_post_' . HolidaysScreen::SAVE_ACTION, array( $this, 'handle_holiday_save' ) );
+		add_action( 'admin_post_' . HolidaysImportScreen::UPLOAD_ACTION, array( $this, 'handle_holidays_csv_upload' ) );
+		add_action( 'admin_post_' . HolidaysImportScreen::CONFIRM_ACTION, array( $this, 'handle_holidays_csv_confirm' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
@@ -139,6 +156,31 @@ final class AdminBootstrap {
 			add_action( 'load-' . $departments_hook, array( $this->departments_screen(), 'handle_actions' ) );
 			add_action( 'admin_notices', array( $this->departments_screen(), 'render_notices' ) );
 		}
+
+		$holidays_hook = add_submenu_page(
+			EmployeesScreen::PAGE_SLUG,
+			__( 'Festivos', 'welow-rrhh' ),
+			__( 'Festivos', 'welow-rrhh' ),
+			Capabilities::CAP_MANAGE_HOLIDAYS,
+			HolidaysScreen::PAGE_SLUG,
+			array( $this->holidays_screen(), 'render' )
+		);
+		if ( $holidays_hook ) {
+			add_action( 'load-' . $holidays_hook, array( $this->holidays_screen(), 'handle_actions' ) );
+			add_action( 'admin_notices', array( $this->holidays_screen(), 'render_notices' ) );
+		}
+
+		$holidays_import_hook = add_submenu_page(
+			EmployeesScreen::PAGE_SLUG,
+			__( 'Importar festivos', 'welow-rrhh' ),
+			__( 'Importar festivos', 'welow-rrhh' ),
+			Capabilities::CAP_MANAGE_HOLIDAYS,
+			HolidaysImportScreen::PAGE_SLUG,
+			array( $this->holidays_import_screen(), 'render' )
+		);
+		if ( $holidays_import_hook ) {
+			add_action( 'load-' . $holidays_import_hook, array( $this->holidays_import_screen(), 'handle_actions' ) );
+		}
 	}
 
 	/**
@@ -175,6 +217,33 @@ final class AdminBootstrap {
 	 */
 	public function handle_department_save(): void {
 		$this->departments_screen()->handle_post_save();
+	}
+
+	/**
+	 * Handler del POST de save de festivo (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_holiday_save(): void {
+		$this->holidays_screen()->handle_post_save();
+	}
+
+	/**
+	 * Handler upload CSV festivos (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_holidays_csv_upload(): void {
+		$this->holidays_import_screen()->handle_upload();
+	}
+
+	/**
+	 * Handler confirm CSV festivos (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_holidays_csv_confirm(): void {
+		$this->holidays_import_screen()->handle_confirm();
 	}
 
 	/**
@@ -233,5 +302,29 @@ final class AdminBootstrap {
 			$this->departments_screen = new DepartmentsScreen( $this->container->get( 'departments.service' ) );
 		}
 		return $this->departments_screen;
+	}
+
+	/**
+	 * Resolución perezosa de la pantalla de festivos.
+	 *
+	 * @return HolidaysScreen
+	 */
+	private function holidays_screen(): HolidaysScreen {
+		if ( null === $this->holidays_screen ) {
+			$this->holidays_screen = new HolidaysScreen( $this->container->get( 'holidays.service' ) );
+		}
+		return $this->holidays_screen;
+	}
+
+	/**
+	 * Resolución perezosa de la pantalla de import CSV de festivos.
+	 *
+	 * @return HolidaysImportScreen
+	 */
+	private function holidays_import_screen(): HolidaysImportScreen {
+		if ( null === $this->holidays_import_screen ) {
+			$this->holidays_import_screen = new HolidaysImportScreen( $this->container->get( 'holidays.importer' ) );
+		}
+		return $this->holidays_import_screen;
 	}
 }
