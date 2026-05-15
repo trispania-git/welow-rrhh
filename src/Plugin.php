@@ -27,6 +27,11 @@ use Welow\RRHH\Holidays\HolidayService;
 use Welow\RRHH\Importers\EmployeeImporter;
 use Welow\RRHH\Importers\HolidayImporter;
 use Welow\RRHH\Modules\ModuleRegistry;
+use Welow\RRHH\Notifications\Channels\EmailChannel;
+use Welow\RRHH\Notifications\Channels\InAppChannel;
+use Welow\RRHH\Notifications\Dispatcher;
+use Welow\RRHH\Notifications\EmailTemplateRenderer;
+use Welow\RRHH\Notifications\NotificationRepository;
 use Welow\RRHH\Settings\CompanySettings;
 
 defined( 'ABSPATH' ) || exit;
@@ -240,6 +245,33 @@ final class Plugin {
 			'settings.company',
 			static function (): CompanySettings {
 				return new CompanySettings();
+			}
+		);
+
+		$this->container->set(
+			'notifications.repository',
+			static function (): NotificationRepository {
+				global $wpdb;
+				return new NotificationRepository( $wpdb );
+			}
+		);
+
+		$this->container->set(
+			'notifications.email_renderer',
+			static function (): EmailTemplateRenderer {
+				return new EmailTemplateRenderer();
+			}
+		);
+
+		$this->container->set(
+			'notifications.dispatcher',
+			static function ( Container $c ): Dispatcher {
+				$in_app = new InAppChannel( $c->get( 'notifications.repository' ) );
+				$email  = new EmailChannel(
+					$c->get( 'notifications.email_renderer' ),
+					$c->get( 'settings.company' )
+				);
+				return new Dispatcher( array( $email, $in_app ) );
 			}
 		);
 	}
