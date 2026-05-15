@@ -20,6 +20,7 @@ use Welow\RRHH\Audit\AuditRepository;
 use Welow\RRHH\Database\Migrator;
 use Welow\RRHH\Employees\EmployeeRepository;
 use Welow\RRHH\Employees\EmployeeService;
+use Welow\RRHH\Importers\EmployeeImporter;
 use Welow\RRHH\Modules\ModuleRegistry;
 
 defined( 'ABSPATH' ) || exit;
@@ -165,6 +166,17 @@ final class Plugin {
 			'employees.service',
 			static function ( Container $c ): EmployeeService {
 				return new EmployeeService(
+					$c->get( 'employees.repository' ),
+					$c->get( 'audit.logger' )
+				);
+			}
+		);
+
+		$this->container->set(
+			'employees.importer',
+			static function ( Container $c ): EmployeeImporter {
+				return new EmployeeImporter(
+					$c->get( 'employees.service' ),
 					$c->get( 'employees.repository' ),
 					$c->get( 'audit.logger' )
 				);

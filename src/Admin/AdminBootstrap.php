@@ -47,6 +47,13 @@ final class AdminBootstrap {
 	private ?EmployeesScreen $employees_screen = null;
 
 	/**
+	 * Pantalla de import CSV (resuelta perezosamente).
+	 *
+	 * @var EmployeesImportScreen|null
+	 */
+	private ?EmployeesImportScreen $import_screen = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Container $container Contenedor del plugin.
@@ -63,6 +70,8 @@ final class AdminBootstrap {
 	public function register_hooks(): void {
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 		add_action( 'admin_post_' . EmployeesScreen::SAVE_ACTION, array( $this, 'handle_post_save' ) );
+		add_action( 'admin_post_' . EmployeesImportScreen::UPLOAD_ACTION, array( $this, 'handle_csv_upload' ) );
+		add_action( 'admin_post_' . EmployeesImportScreen::CONFIRM_ACTION, array( $this, 'handle_csv_confirm' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
@@ -95,6 +104,19 @@ final class AdminBootstrap {
 			add_action( 'load-' . $hook_suffix, array( $this->employees_screen(), 'handle_actions' ) );
 			add_action( 'admin_notices', array( $this->employees_screen(), 'render_notices' ) );
 		}
+
+		$import_hook = add_submenu_page(
+			EmployeesScreen::PAGE_SLUG,
+			__( 'Importar empleados', 'welow-rrhh' ),
+			__( 'Importar', 'welow-rrhh' ),
+			Capabilities::CAP_MANAGE_EMPLOYEES,
+			EmployeesImportScreen::PAGE_SLUG,
+			array( $this->import_screen(), 'render' )
+		);
+
+		if ( $import_hook ) {
+			add_action( 'load-' . $import_hook, array( $this->import_screen(), 'handle_actions' ) );
+		}
 	}
 
 	/**
@@ -104,6 +126,24 @@ final class AdminBootstrap {
 	 */
 	public function handle_post_save(): void {
 		$this->employees_screen()->handle_post_save();
+	}
+
+	/**
+	 * Handler del POST de upload CSV (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_csv_upload(): void {
+		$this->import_screen()->handle_upload();
+	}
+
+	/**
+	 * Handler del POST de confirmación del import (delegado).
+	 *
+	 * @return void
+	 */
+	public function handle_csv_confirm(): void {
+		$this->import_screen()->handle_confirm();
 	}
 
 	/**
@@ -135,5 +175,17 @@ final class AdminBootstrap {
 			$this->employees_screen = new EmployeesScreen( $this->container->get( 'employees.service' ) );
 		}
 		return $this->employees_screen;
+	}
+
+	/**
+	 * Resolución perezosa de la pantalla de import CSV.
+	 *
+	 * @return EmployeesImportScreen
+	 */
+	private function import_screen(): EmployeesImportScreen {
+		if ( null === $this->import_screen ) {
+			$this->import_screen = new EmployeesImportScreen( $this->container->get( 'employees.importer' ) );
+		}
+		return $this->import_screen;
 	}
 }

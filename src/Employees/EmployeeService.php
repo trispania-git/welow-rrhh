@@ -137,6 +137,88 @@ final class EmployeeService {
 	}
 
 	/**
+	 * Crea un empleado para un WP_User existente (vinculación, no crea usuario).
+	 *
+	 * Útil cuando un usuario WordPress ya existe (p. ej. importado desde CSV
+	 * con un email que coincide con un usuario previo) y queremos darlo de
+	 * alta como empleado sin duplicarlo.
+	 *
+	 * Asegura que el usuario tenga el rol indicado (default welow_employee).
+	 *
+	 * @param int                  $user_id ID del WP_User existente.
+	 * @param array<string, mixed> $data    Datos del empleado (sin email; se toma del user).
+	 * @param array<string, mixed> $opts    Opciones (role).
+	 * @return Employee|\WP_Error
+	 */
+	public function create_for_existing_user( int $user_id, array $data, array $opts = array() ) {
+		$user = get_userdata( $user_id );
+		if ( false === $user ) {
+			return new \WP_Error( 'welow_user_not_found', __( 'Usuario WordPress no encontrado.', 'welow-rrhh' ) );
+		}
+
+		if ( null !== $this->repository->find_by_user_id( $user_id ) ) {
+			return new \WP_Error(
+				'welow_user_already_linked',
+				__( 'Este usuario ya está vinculado a un empleado.', 'welow-rrhh' )
+			);
+		}
+
+		$data['email'] = $user->user_email;
+		$errors        = EmployeeValidator::validate_create( $data );
+		if ( $errors->has_errors() ) {
+			return $errors;
+		}
+
+		// Unicidades (saltamos email — el user ya existe legítimamente).
+		$u_errors = new \WP_Error();
+		if ( ! empty( $data['employee_code'] ) ) {
+			$code = sanitize_text_field( (string) $data['employee_code'] );
+			if ( null !== $this->repository->find_by_code( $code ) ) {
+				$u_errors->add( 'employee_code', __( 'Ya existe un empleado con ese código.', 'welow-rrhh' ) );
+			}
+		}
+		if ( ! empty( $data['dni_nie'] ) ) {
+			$dni = Dni::normalize( (string) $data['dni_nie'] );
+			if ( null !== $dni && null !== $this->repository->find_by_dni( $dni ) ) {
+				$u_errors->add( 'dni_nie', __( 'Ya existe un empleado con ese DNI/NIE.', 'welow-rrhh' ) );
+			}
+		}
+		if ( $u_errors->has_errors() ) {
+			return $u_errors;
+		}
+
+		$role = isset( $opts['role'] ) && '' !== $opts['role'] ? (string) $opts['role'] : Capabilities::ROLE_EMPLOYEE;
+		if ( ! in_array( $role, (array) $user->roles, true ) ) {
+			$user->add_role( $role );
+		}
+
+		try {
+			$employee_id = $this->repository->create( $this->build_employee_dto( $user_id, $data ) );
+		} catch ( \Throwable $e ) {
+			return new \WP_Error( 'welow_employee_create_failed', $e->getMessage() );
+		}
+
+		$employee = $this->repository->find_by_id( $employee_id );
+		if ( null === $employee ) {
+			return new \WP_Error( 'welow_employee_lookup_failed', __( 'Empleado creado pero no recuperable.', 'welow-rrhh' ) );
+		}
+
+		$this->audit->log(
+			'create',
+			self::AUDIT_ENTITY,
+			$employee->id,
+			array(
+				'user_id' => $user_id,
+				'email'   => $user->user_email,
+				'name'    => $employee->full_name(),
+				'linked'  => true,
+			)
+		);
+
+		return $employee;
+	}
+
+	/**
 	 * Actualiza un empleado existente.
 	 *
 	 * Sincroniza email/nombre con el WP_User si esos campos cambian.
