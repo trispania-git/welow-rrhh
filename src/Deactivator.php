@@ -22,13 +22,13 @@ final class Deactivator {
 	/**
 	 * Punto de entrada del hook register_deactivation_hook().
 	 *
+	 * Mismo razonamiento que Activator::activate(): no añadimos check de
+	 * capability — register_deactivation_hook ya garantiza la invocación
+	 * desde el contexto correcto y el check rompe wp-cli / WP-Cron.
+	 *
 	 * @return void
 	 */
 	public static function deactivate(): void {
-		if ( ! current_user_can( 'activate_plugins' ) ) {
-			return;
-		}
-
 		flush_rewrite_rules( false );
 	}
 }

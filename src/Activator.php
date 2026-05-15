@@ -25,13 +25,14 @@ final class Activator {
 	/**
 	 * Punto de entrada del hook register_activation_hook().
 	 *
+	 * No comprobamos current_user_can() aquí: register_activation_hook ya
+	 * garantiza que el callback sólo se invoca cuando WP activa el plugin
+	 * (no es invocable externamente). Añadir el check rompe escenarios como
+	 * wp-cli sin --user, WP-Cron y tests de integración.
+	 *
 	 * @return void
 	 */
 	public static function activate(): void {
-		if ( ! current_user_can( 'activate_plugins' ) ) {
-			return;
-		}
-
 		Schema::install();
 		Capabilities::install();
 		self::seed_options();
