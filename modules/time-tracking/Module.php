@@ -20,6 +20,8 @@ namespace Welow\RRHH\Modules\TimeTracking;
 
 use Welow\RRHH\Container;
 use Welow\RRHH\Modules\AbstractModule;
+use Welow\RRHH\Modules\TimeTracking\Policy\PunchGuard;
+use Welow\RRHH\Modules\TimeTracking\Policy\PunchPolicyResolver;
 use Welow\RRHH\Modules\TimeTracking\Repository\TimeEntryRepository;
 use Welow\RRHH\Modules\TimeTracking\Schema\TimeTrackingSchema;
 use Welow\RRHH\Modules\TimeTracking\Service\TimeEntryService;
@@ -119,6 +121,29 @@ final class Module extends AbstractModule {
 				);
 			}
 		);
+
+		$container->set(
+			'time_tracking.policy_resolver',
+			static function ( Container $c ): PunchPolicyResolver {
+				return new PunchPolicyResolver(
+					$c->get( 'settings.company' ),
+					$c->get( 'employees.repository' )
+				);
+			}
+		);
+
+		$container->set(
+			'time_tracking.punch_guard',
+			static function ( Container $c ): PunchGuard {
+				return new PunchGuard(
+					$c->get( 'time_tracking.policy_resolver' ),
+					$c->get( 'audit.logger' )
+				);
+			}
+		);
+
+		// Engancha el filtro can_punch.
+		$container->get( 'time_tracking.punch_guard' )->register_hooks();
 
 		/**
 		 * Disparado cuando el módulo Fichajes ha terminado de arrancar.
