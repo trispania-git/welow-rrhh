@@ -1,0 +1,2560 @@
+# Copyright (C) 2026 Trispania
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Welow RRHH 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/welow-rrhh\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-05-16T09:13:23+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: welow-rrhh\n"
+
+#. Plugin Name of the plugin
+#: welow-rrhh.php
+#: src/Admin/AdminBootstrap.php:130
+#: src/Admin/AdminBootstrap.php:131
+#: src/Notifications/EmailTemplateRenderer.php:181
+msgid "Welow RRHH"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: welow-rrhh.php
+msgid "https://github.com/trispania-git/welow-rrhh"
+msgstr ""
+
+#. Description of the plugin
+#: welow-rrhh.php
+msgid "Plugin white-label para centralizar procesos de RRHH en PYMES (núcleo modular + Fichajes + Vacaciones)."
+msgstr ""
+
+#. Author of the plugin
+#: welow-rrhh.php
+msgid "Trispania"
+msgstr ""
+
+#. Author URI of the plugin
+#: welow-rrhh.php
+msgid "https://github.com/trispania-git"
+msgstr ""
+
+#: modules/time-tracking/Module.php:51
+#: modules/time-tracking/src/Admin/AdminBootstrap.php:76
+#: modules/time-tracking/src/Admin/AdminBootstrap.php:77
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:214
+#: src/Admin/SettingsScreen.php:125
+#: src/Admin/WizardScreen.php:465
+msgid "Fichajes"
+msgstr ""
+
+#: modules/time-tracking/Module.php:58
+msgid "Control horario conforme al RDL 8/2019: registro de eventos, restricciones geo/IP, cierre de mes y exportación PDF mensual."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/AdminBootstrap.php:88
+#: modules/time-tracking/src/Admin/AdminBootstrap.php:89
+msgid "Cierre de mes"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:49
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:121
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:82
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:113
+#: modules/vacations/src/Admin/VacationsScreen.php:86
+#: modules/vacations/src/Admin/VacationsScreen.php:300
+#: modules/vacations/src/Admin/VacationYearsScreen.php:58
+#: modules/vacations/src/Admin/VacationYearsScreen.php:180
+#: src/Admin/DepartmentsScreen.php:61
+#: src/Admin/DepartmentsScreen.php:92
+#: src/Admin/DepartmentsScreen.php:171
+#: src/Admin/EmployeesImportScreen.php:64
+#: src/Admin/EmployeesImportScreen.php:135
+#: src/Admin/EmployeesImportScreen.php:181
+#: src/Admin/EmployeesImportScreen.php:199
+#: src/Admin/HolidaysImportScreen.php:57
+#: src/Admin/HolidaysImportScreen.php:122
+#: src/Admin/HolidaysImportScreen.php:168
+#: src/Admin/HolidaysImportScreen.php:186
+#: src/Admin/HolidaysScreen.php:62
+#: src/Admin/HolidaysScreen.php:88
+#: src/Admin/HolidaysScreen.php:164
+#: src/Admin/SettingsScreen.php:59
+#: src/Admin/SettingsScreen.php:115
+#: src/Admin/WizardScreen.php:98
+#: src/Admin/WizardScreen.php:148
+msgid "No tienes permisos."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:56
+msgid "Cierre de mes — Fichajes"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:58
+msgid "Al cerrar un mes, los registros de ese periodo pasan a sólo lectura. Sólo administradores Welow podrán editarlos posteriormente con motivo extendido."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:60
+msgid "Cerrar un mes"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:67
+#: modules/vacations/src/Admin/VacationsScreen.php:133
+msgid "Año:"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:71
+msgid "Mes:"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:74
+msgid "Cerrar mes"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:78
+msgid "Meses cerrados"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:80
+msgid "Aún no se ha cerrado ningún mes."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:85
+msgid "Periodo"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:86
+msgid "Acción"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:101
+msgid "Motivo (obligatorio)"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:102
+msgid "Reabrir"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:139
+#: modules/vacations/src/Admin/VacationsScreen.php:306
+#: modules/vacations/src/Admin/VacationYearsScreen.php:220
+msgid "Operación no válida."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:145
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:338
+msgid "Mes cerrado."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/MonthClosureScreen.php:145
+msgid "Mes reabierto."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:89
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:360
+msgid "Fecha y hora"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:90
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:273
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:356
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:237
+#: modules/vacations/src/Admin/VacationsScreen.php:205
+#: modules/vacations/templates/tab-team-approvals.php:34
+#: modules/vacations/templates/tab-team-calendar.php:47
+msgid "Empleado"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:91
+#: modules/time-tracking/templates/tab-my-entries.php:76
+msgid "Evento"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:92
+#: modules/time-tracking/templates/tab-my-entries.php:77
+msgid "Origen"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:93
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:377
+#: modules/time-tracking/templates/tab-my-entries.php:78
+msgid "Nota"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:94
+#: modules/time-tracking/templates/tab-my-entries.php:79
+msgid "Editado"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:95
+msgid "Cerrado"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:220
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:222
+#: modules/time-tracking/templates/tab-my-entries.php:89
+#: modules/vacations/src/Admin/VacationYearsScreen.php:82
+#: modules/vacations/src/Admin/VacationYearsScreen.php:100
+msgid "Sí"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:240
+#: src/Admin/DepartmentsListTable.php:140
+#: src/Admin/EmployeesListTable.php:172
+#: src/Admin/HolidaysListTable.php:132
+msgid "Editar"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:250
+#: modules/time-tracking/templates/tab-my-entries.php:52
+msgid "No hay fichajes en el rango seleccionado."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:275
+msgid "Todos los empleados visibles"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesListTable.php:288
+#: modules/time-tracking/templates/tab-my-entries.php:46
+#: modules/vacations/src/Admin/VacationsScreen.php:157
+#: src/Admin/EmployeesListTable.php:262
+#: src/Admin/HolidaysListTable.php:201
+msgid "Filtrar"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:96
+msgid "Fichaje no encontrado"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:125
+msgid "Fichaje no encontrado."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:130
+msgid "No puedes editar tus propios fichajes."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:133
+msgid "No puedes editar fichajes ajenos."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:160
+msgid "Fichaje actualizado."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:178
+msgid "Operación realizada."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:178
+msgid "Ha habido un error."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:216
+msgid "Exportar mes (PDF)"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:217
+msgid "Exportar mes (CSV)"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:220
+msgid "Filtra por un empleado para habilitar la exportación mensual."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:250
+msgid "Parámetros inválidos para la exportación."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:259
+msgid "Sin permisos."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:263
+msgid "Sólo puedes exportar fichajes de los empleados de tu equipo."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:331
+msgid "Editar fichaje"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:332
+#: src/Admin/DepartmentsScreen.php:229
+#: src/Admin/HolidaysScreen.php:226
+msgid "Volver"
+msgstr ""
+
+#. translators: %d: minimum characters.
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:342
+#, php-format
+msgid "Sólo un usuario con permiso de cierre puede editar. El motivo debe tener al menos %d caracteres."
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:365
+msgid "Tipo de evento"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:381
+msgid "Motivo de edición"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:384
+msgid "Explica por qué se modifica este fichaje"
+msgstr ""
+
+#: modules/time-tracking/src/Admin/TimeEntriesScreen.php:388
+#: src/Admin/DepartmentsScreen.php:274
+#: src/Admin/EmployeesScreen.php:390
+#: src/Admin/HolidaysScreen.php:267
+#: src/Admin/SettingsScreen.php:177
+msgid "Guardar cambios"
+msgstr ""
+
+#: modules/time-tracking/src/Closure/ClosureGuard.php:107
+msgid "El mes está cerrado. No puedes modificar fichajes de ese periodo."
+msgstr ""
+
+#. translators: %d: minimum characters.
+#: modules/time-tracking/src/Closure/ClosureGuard.php:117
+#, php-format
+msgid "Edición en mes cerrado: el motivo debe tener al menos %d caracteres."
+msgstr ""
+
+#: modules/time-tracking/src/Closure/MonthClosure.php:83
+msgid "Año o mes inválido."
+msgstr ""
+
+#: modules/time-tracking/src/Closure/MonthClosure.php:88
+msgid "Este mes ya está cerrado."
+msgstr ""
+
+#: modules/time-tracking/src/Closure/MonthClosure.php:131
+msgid "Indica el motivo de la reapertura."
+msgstr ""
+
+#: modules/time-tracking/src/Closure/MonthClosure.php:136
+msgid "Ese mes no está cerrado."
+msgstr ""
+
+#: modules/time-tracking/src/Data/EventType.php:45
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:146
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:256
+#: modules/time-tracking/src/Frontend/PunchTab.php:144
+msgid "Entrada"
+msgstr ""
+
+#: modules/time-tracking/src/Data/EventType.php:47
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:147
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:256
+#: modules/time-tracking/src/Frontend/PunchTab.php:128
+msgid "Salida"
+msgstr ""
+
+#: modules/time-tracking/src/Data/EventType.php:49
+msgid "Inicio pausa"
+msgstr ""
+
+#: modules/time-tracking/src/Data/EventType.php:51
+msgid "Fin pausa"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:145
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:256
+msgid "Día"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:148
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:256
+msgid "Pausa"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:149
+msgid "Horas trabajadas"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:150
+msgid "Eventos"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:151
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:256
+msgid "Notas"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:169
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:272
+msgid "TOTAL"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:231
+msgid "REGISTRO HORARIO"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:233
+msgid "RDL 8/2019"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:238
+#: src/Admin/DepartmentsListTable.php:63
+#: src/Admin/DepartmentsScreen.php:242
+#: src/Admin/EmployeesImportScreen.php:408
+#: src/Admin/EmployeesListTable.php:58
+#: src/Admin/EmployeesScreen.php:301
+#: src/Admin/HolidaysImportScreen.php:338
+#: src/Admin/HolidaysListTable.php:58
+#: src/Admin/HolidaysScreen.php:244
+#: src/Exporters/Sources/EmployeesExportSource.php:92
+#: src/Frontend/templates/tab-summary.php:30
+msgid "Nombre"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:240
+#: src/Admin/EmployeesListTable.php:60
+#: src/Exporters/Sources/EmployeesExportSource.php:91
+msgid "Código"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:243
+#: src/Admin/EmployeesListTable.php:61
+#: src/Exporters/Sources/EmployeesExportSource.php:95
+msgid "DNI/NIE"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:246
+#: src/Admin/EmployeesScreen.php:337
+#: src/Exporters/Sources/EmployeesExportSource.php:96
+#: src/Frontend/templates/tab-summary.php:41
+msgid "Departamento"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:249
+msgid "Fecha alta"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:254
+msgid "Registro diario"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:256
+msgid "Horas"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:281
+msgid "Firma del trabajador"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:282
+msgid "Firma de la empresa"
+msgstr ""
+
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:286
+msgid "Documento generado conforme al Real Decreto-ley 8/2019, de 8 de marzo, de medidas urgentes de protección social y de lucha contra la precariedad laboral en la jornada de trabajo."
+msgstr ""
+
+#. translators: %s: timestamp in Y-m-d H:i format.
+#: modules/time-tracking/src/Exporters/MonthlyReport.php:289
+#, php-format
+msgid "Generado el %s"
+msgstr ""
+
+#: modules/time-tracking/src/Frontend/MyTimeEntriesTab.php:50
+#: modules/time-tracking/templates/tab-my-entries.php:33
+msgid "Mis fichajes"
+msgstr ""
+
+#: modules/time-tracking/src/Frontend/PunchTab.php:63
+#: modules/time-tracking/templates/tab-punch.php:30
+msgid "Fichar"
+msgstr ""
+
+#: modules/time-tracking/src/Frontend/PunchTab.php:123
+msgid "Iniciar pausa"
+msgstr ""
+
+#: modules/time-tracking/src/Frontend/PunchTab.php:136
+msgid "Reanudar"
+msgstr ""
+
+#: modules/time-tracking/src/Policy/PunchGuard.php:85
+msgid "Fichaje no permitido desde esta red. Contacta con RRHH si es un error."
+msgstr ""
+
+#: modules/time-tracking/src/Policy/PunchGuard.php:103
+msgid "Para fichar necesitas permitir la geolocalización en tu navegador."
+msgstr ""
+
+#: modules/time-tracking/src/Policy/PunchGuard.php:112
+msgid "Fichaje no permitido desde esta ubicación. Contacta con RRHH si es un error."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:186
+msgid "No tienes permisos para ver tus fichajes."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:193
+msgid "No tienes permisos para ver fichajes de otros usuarios."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:227
+msgid "Has excedido el límite de fichajes por minuto. Espera unos segundos."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:234
+msgid "Tipo de evento no válido."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:268
+#: modules/time-tracking/src/Service/TimeEntryService.php:176
+#: modules/time-tracking/src/Service/TimeEntryService.php:245
+msgid "Evento no encontrado."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:276
+msgid "No tienes permisos para editar tus fichajes."
+msgstr ""
+
+#: modules/time-tracking/src/REST/PunchesController.php:279
+msgid "No tienes permisos para editar fichajes ajenos."
+msgstr ""
+
+#: modules/time-tracking/src/Service/TimeEntryService.php:133
+msgid "Evento creado pero no recuperable."
+msgstr ""
+
+#: modules/time-tracking/src/Service/TimeEntryService.php:180
+msgid "Indica el motivo de la edición."
+msgstr ""
+
+#: modules/time-tracking/src/Service/TimeEntryService.php:200
+msgid "No se han indicado cambios."
+msgstr ""
+
+#: modules/time-tracking/src/Service/TimeEntryService.php:264
+msgid "Indica el motivo del borrado."
+msgstr ""
+
+#: modules/time-tracking/src/Service/TimeEntryService.php:267
+msgid "No se pudo eliminar el evento."
+msgstr ""
+
+#: modules/time-tracking/src/Service/TimeEntryService.php:320
+msgid "El primer evento debe ser una entrada."
+msgstr ""
+
+#. translators: 1: last event label, 2: attempted event label.
+#: modules/time-tracking/src/Service/TimeEntryService.php:340
+#, php-format
+msgid "Transición no válida: tras \"%1$s\" no se puede registrar \"%2$s\"."
+msgstr ""
+
+#: modules/time-tracking/templates/tab-my-entries.php:38
+#: modules/vacations/src/Admin/VacationsScreen.php:207
+#: modules/vacations/templates/tab-my-vacations.php:97
+#: modules/vacations/templates/tab-my-vacations.php:138
+#: modules/vacations/templates/tab-team-approvals.php:36
+#: modules/vacations/templates/tab-team-calendar.php:48
+msgid "Desde"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-my-entries.php:42
+#: modules/vacations/src/Admin/VacationsScreen.php:208
+#: modules/vacations/templates/tab-my-vacations.php:101
+#: modules/vacations/templates/tab-my-vacations.php:139
+#: modules/vacations/templates/tab-team-approvals.php:37
+#: modules/vacations/templates/tab-team-calendar.php:49
+msgid "Hasta"
+msgstr ""
+
+#. translators: 1: hours worked (HH:MM), 2: break duration.
+#: modules/time-tracking/templates/tab-my-entries.php:67
+#, php-format
+msgid "Trabajado: %1$s · Pausas: %2$s"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-my-entries.php:75
+msgid "Hora"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-punch.php:23
+msgid "Fuera de jornada"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-punch.php:24
+msgid "Jornada en curso"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-punch.php:25
+msgid "En pausa"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-punch.php:33
+#: modules/vacations/src/Admin/VacationsScreen.php:141
+msgid "Estado:"
+msgstr ""
+
+#. translators: 1: event label, 2: formatted timestamp.
+#: modules/time-tracking/templates/tab-punch.php:39
+#, php-format
+msgid "Último evento: %1$s a las %2$s"
+msgstr ""
+
+#: modules/time-tracking/templates/tab-punch.php:67
+msgid "Tu empresa requiere geolocalización para fichar. El navegador te pedirá permiso."
+msgstr ""
+
+#: modules/vacations/Module.php:54
+#: modules/vacations/src/Admin/AdminBootstrap.php:76
+#: modules/vacations/src/Admin/AdminBootstrap.php:77
+#: modules/vacations/src/Admin/VacationsScreen.php:122
+#: modules/vacations/src/Data/RequestType.php:50
+#: src/Admin/SettingsScreen.php:124
+#: src/Admin/WizardScreen.php:464
+msgid "Vacaciones"
+msgstr ""
+
+#: modules/vacations/Module.php:61
+msgid "Gestión de vacaciones con saldo anual, solicitudes, flujo de aprobación y carry-over con caducidad configurable año a año."
+msgstr ""
+
+#: modules/vacations/src/Admin/AdminBootstrap.php:88
+#: modules/vacations/src/Admin/AdminBootstrap.php:89
+#: modules/vacations/src/Admin/VacationYearsScreen.php:66
+msgid "Años de vacaciones"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:123
+msgid "Configurar años"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:129
+msgid "Empleado (User ID):"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:143
+msgid "Todos"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:146
+#: modules/vacations/src/Data/RequestStatus.php:45
+msgid "Pendiente"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:147
+#: modules/vacations/src/Data/RequestStatus.php:47
+msgid "Aprobada"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:148
+#: modules/vacations/src/Data/RequestStatus.php:49
+msgid "Rechazada"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:149
+#: modules/vacations/src/Data/RequestStatus.php:51
+msgid "Cancelada"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:166
+msgid "Saldo del empleado:"
+msgstr ""
+
+#. translators: 1: accrued, 2: used, 3: carry-over, 4: available.
+#: modules/vacations/src/Admin/VacationsScreen.php:169
+#, php-format
+msgid "Acreditado %1$s · Usado %2$s · Arrastrado %3$s · Disponible %4$s"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:197
+msgid "No hay solicitudes que coincidan con el filtro."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:204
+#: src/Exporters/Sources/EmployeesExportSource.php:90
+msgid "ID"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:206
+#: modules/vacations/templates/tab-my-vacations.php:137
+#: modules/vacations/templates/tab-team-approvals.php:35
+#: src/Admin/HolidaysImportScreen.php:339
+msgid "Tipo"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:209
+#: modules/vacations/templates/tab-my-vacations.php:140
+#: modules/vacations/templates/tab-team-approvals.php:38
+#: modules/vacations/templates/tab-team-calendar.php:50
+msgid "Días"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:210
+#: modules/vacations/templates/tab-my-vacations.php:141
+#: modules/vacations/templates/tab-team-calendar.php:51
+#: src/Admin/EmployeesListTable.php:63
+#: src/Admin/EmployeesScreen.php:371
+#: src/Exporters/Sources/EmployeesExportSource.php:98
+msgid "Estado"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:211
+#: modules/vacations/src/Admin/VacationYearsScreen.php:133
+msgid "Acciones"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:234
+#: modules/vacations/templates/tab-team-approvals.php:58
+msgid "Aprobar"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:235
+#: modules/vacations/templates/tab-team-approvals.php:61
+msgid "Rechazar"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:238
+#: modules/vacations/templates/tab-my-vacations.php:168
+#: src/Admin/EmployeesImportScreen.php:336
+#: src/Admin/HolidaysImportScreen.php:277
+msgid "Cancelar"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:266
+#: modules/vacations/templates/tab-my-vacations.php:117
+msgid "Motivo (opcional)"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationsScreen.php:312
+msgid "Solicitud actualizada."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:67
+msgid "Define qué años están abiertos a solicitudes y la política de arrastre (carry-over) al año siguiente. Un año que no aparezca aquí se considera cerrado."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:69
+msgid "Añadir o actualizar un año"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:77
+#: modules/vacations/src/Admin/VacationYearsScreen.php:128
+#: src/Admin/HolidaysListTable.php:60
+#: src/Admin/HolidaysListTable.php:176
+msgid "Año"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:81
+msgid "Abierto a solicitudes"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:85
+msgid "Fecha límite de solicitud"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:88
+msgid "Opcional. A partir de esta fecha no se admitirán nuevas solicitudes para ese año."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:92
+#: modules/vacations/templates/tab-my-vacations.php:50
+msgid "Días acreditados"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:95
+msgid "Opcional. Si se deja vacío se usa el default global de la empresa."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:99
+#: src/Admin/SettingsScreen.php:311
+msgid "Permitir arrastre al año siguiente"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:103
+msgid "Máximo a arrastrar (días)"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:106
+msgid "Opcional. Vacío = sin tope."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:110
+msgid "Caducidad de los días arrastrados"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:113
+msgid "Opcional. Última fecha en la que pueden disfrutarse los días arrastrados desde el año anterior. Pasada esa fecha desaparecen del saldo."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:118
+msgid "Guardar año"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:121
+msgid "Años configurados"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:123
+msgid "Aún no has configurado ningún año."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:129
+msgid "Abierto"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:130
+msgid "Deadline solicitud"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:131
+msgid "Días acred."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:132
+msgid "Carry-over"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:142
+msgid "default empresa"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:145
+msgid "No"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:148
+msgid "sin tope"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:149
+msgid "sin caducidad"
+msgstr ""
+
+#. translators: 1: max days, 2: deadline date.
+#: modules/vacations/src/Admin/VacationYearsScreen.php:151
+#, php-format
+msgid "máx %1$s · caducan %2$s"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:156
+msgid "¿Eliminar la configuración de este año?"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:161
+#: src/Admin/DepartmentsListTable.php:145
+#: src/Admin/EmployeesListTable.php:188
+#: src/Admin/HolidaysListTable.php:137
+msgid "Eliminar"
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:194
+msgid "No se pudo eliminar."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:195
+msgid "Año eliminado."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:213
+msgid "Año fuera de rango."
+msgstr ""
+
+#: modules/vacations/src/Admin/VacationYearsScreen.php:218
+msgid "Año guardado."
+msgstr ""
+
+#: modules/vacations/src/Data/RequestType.php:52
+msgid "Asuntos propios"
+msgstr ""
+
+#: modules/vacations/src/Data/RequestType.php:54
+msgid "Baja médica"
+msgstr ""
+
+#: modules/vacations/src/Data/RequestType.php:56
+msgid "Sin sueldo"
+msgstr ""
+
+#: modules/vacations/src/Frontend/MyVacationsTab.php:70
+msgid "Mis vacaciones"
+msgstr ""
+
+#: modules/vacations/src/Frontend/TeamApprovalsTab.php:61
+msgid "Aprobaciones"
+msgstr ""
+
+#: modules/vacations/src/Frontend/TeamApprovalsTab.php:95
+msgid "No tienes miembros de equipo a tu cargo."
+msgstr ""
+
+#: modules/vacations/src/Frontend/TeamCalendarTab.php:63
+msgid "Calendario equipo"
+msgstr ""
+
+#. translators: %s: requester name.
+#: modules/vacations/src/Notifications/VacationNotifications.php:94
+#, php-format
+msgid "Nueva solicitud de vacaciones de %s"
+msgstr ""
+
+#. translators: 1: requester name, 2: date range, 3: days.
+#: modules/vacations/src/Notifications/VacationNotifications.php:99
+#, php-format
+msgid "%1$s ha solicitado vacaciones del %2$s (%3$s)."
+msgstr ""
+
+#: modules/vacations/src/Notifications/VacationNotifications.php:105
+msgid "Revisar solicitud"
+msgstr ""
+
+#: modules/vacations/src/Notifications/VacationNotifications.php:132
+msgid "Tu solicitud de vacaciones ha sido aprobada"
+msgstr ""
+
+#. translators: 1: date range, 2: days, 3: approver name.
+#: modules/vacations/src/Notifications/VacationNotifications.php:135
+#, php-format
+msgid "Tu solicitud del %1$s (%2$s) ha sido aprobada por %3$s."
+msgstr ""
+
+#: modules/vacations/src/Notifications/VacationNotifications.php:141
+#: modules/vacations/src/Notifications/VacationNotifications.php:186
+msgid "Ver mis vacaciones"
+msgstr ""
+
+#. translators: 1: date range, 2: days, 3: approver name.
+#: modules/vacations/src/Notifications/VacationNotifications.php:166
+#, php-format
+msgid "Tu solicitud del %1$s (%2$s) ha sido rechazada por %3$s."
+msgstr ""
+
+#. translators: %s: reason.
+#: modules/vacations/src/Notifications/VacationNotifications.php:174
+#, php-format
+msgid "Motivo: %s"
+msgstr ""
+
+#: modules/vacations/src/Notifications/VacationNotifications.php:183
+msgid "Tu solicitud de vacaciones ha sido rechazada"
+msgstr ""
+
+#. translators: %s: requester name.
+#: modules/vacations/src/Notifications/VacationNotifications.php:217
+#, php-format
+msgid "Cancelada la solicitud de vacaciones de %s"
+msgstr ""
+
+#. translators: 1: requester name, 2: date range.
+#: modules/vacations/src/Notifications/VacationNotifications.php:222
+#, php-format
+msgid "%1$s ha cancelado su solicitud del %2$s."
+msgstr ""
+
+#: modules/vacations/src/Notifications/VacationNotifications.php:227
+msgid "Ver solicitudes"
+msgstr ""
+
+#. translators: 1: start date, 2: end date.
+#: modules/vacations/src/Notifications/VacationNotifications.php:252
+#, php-format
+msgid "%1$s al %2$s"
+msgstr ""
+
+#. translators: %d: days.
+#: modules/vacations/src/Notifications/VacationNotifications.php:268
+#, php-format
+msgid "%d día"
+msgid_plural "%d días"
+msgstr[0] ""
+msgstr[1] ""
+
+#: modules/vacations/src/Notifications/VacationNotifications.php:272
+msgid "días"
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:211
+msgid "No tienes permisos para ver tus vacaciones."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:218
+msgid "No tienes permisos para ver vacaciones de otros usuarios."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:263
+msgid "Has excedido el límite de solicitudes por minuto. Espera unos segundos."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:272
+msgid "Fechas inválidas (formato YYYY-MM-DD)."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:310
+#: modules/vacations/src/Service/ApprovalService.php:271
+#: modules/vacations/src/Service/RequestService.php:317
+msgid "Solicitud no encontrada."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:316
+msgid "No tienes permisos para aprobar esta solicitud."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:322
+msgid "No tienes permisos para rechazar esta solicitud."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:329
+msgid "No tienes permisos para cancelar."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:332
+msgid "No tienes permisos para cancelar solicitudes ajenas."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:337
+msgid "Acción no soportada."
+msgstr ""
+
+#: modules/vacations/src/REST/VacationsController.php:363
+msgid "No tienes permisos para ver el saldo de otros usuarios."
+msgstr ""
+
+#: modules/vacations/src/Service/ApprovalService.php:116
+msgid "No se pudo aprobar la solicitud."
+msgstr ""
+
+#: modules/vacations/src/Service/ApprovalService.php:174
+msgid "No se pudo rechazar la solicitud."
+msgstr ""
+
+#: modules/vacations/src/Service/ApprovalService.php:274
+msgid "Sólo se pueden decidir solicitudes pendientes."
+msgstr ""
+
+#: modules/vacations/src/Service/ApprovalService.php:277
+msgid "No tienes permisos para decidir esta solicitud."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:144
+msgid "La fecha de fin debe ser igual o posterior a la de inicio."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:149
+msgid "No se permiten solicitudes que crucen dos años. Divídelas en dos."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:155
+msgid "El año seleccionado no está abierto para solicitar vacaciones."
+msgstr ""
+
+#. translators: %s: deadline date (Y-m-d).
+#: modules/vacations/src/Service/RequestService.php:166
+#, php-format
+msgid "La fecha límite para solicitar vacaciones de ese año (%s) ya ha pasado."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:174
+msgid "No puedes solicitar vacaciones para fechas pasadas."
+msgstr ""
+
+#. translators: %d: minimum notice in days.
+#: modules/vacations/src/Service/RequestService.php:188
+#, php-format
+msgid "Debes solicitar con al menos %d día(s) de antelación."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:198
+msgid "El rango seleccionado no incluye ningún día computable."
+msgstr ""
+
+#. translators: %d: max consecutive days.
+#: modules/vacations/src/Service/RequestService.php:206
+#, php-format
+msgid "Una solicitud no puede superar %d días consecutivos."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:215
+msgid "Ya tienes una solicitud activa que se solapa con estas fechas."
+msgstr ""
+
+#. translators: 1: requested days; 2: available days.
+#: modules/vacations/src/Service/RequestService.php:226
+#, php-format
+msgid "Saldo insuficiente: solicitas %1$s días y tienes %2$s disponibles."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:275
+msgid "Solicitud creada pero no recuperable."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:320
+msgid "Sólo se pueden cancelar solicitudes pendientes o aprobadas."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:325
+msgid "No se puede cancelar una solicitud que ya ha comenzado."
+msgstr ""
+
+#: modules/vacations/src/Service/RequestService.php:339
+msgid "No se pudo cancelar la solicitud."
+msgstr ""
+
+#. translators: %d: year.
+#: modules/vacations/templates/tab-my-vacations.php:43
+#, php-format
+msgid "Mis vacaciones %d"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:54
+msgid "Disfrutados"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:59
+msgid "Arrastrados"
+msgstr ""
+
+#. translators: %s: expiry date.
+#: modules/vacations/templates/tab-my-vacations.php:66
+#, php-format
+msgid "(caducan %s)"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:74
+msgid "Disponibles"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:84
+msgid "El año actual no está abierto para solicitar vacaciones. Habla con tu departamento de RRHH."
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:86
+msgid "El año actual está cerrado para nuevas solicitudes."
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:88
+msgid "No tienes permisos para crear solicitudes."
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:94
+msgid "Solicitar vacaciones"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:108
+msgid "Empezar por la tarde (medio día)"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:112
+msgid "Terminar por la mañana (medio día)"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:123
+msgid "Enviar solicitud"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:130
+msgid "Tus solicitudes"
+msgstr ""
+
+#: modules/vacations/templates/tab-my-vacations.php:132
+msgid "Aún no has enviado solicitudes este año."
+msgstr ""
+
+#: modules/vacations/templates/tab-team-approvals.php:26
+msgid "Aprobaciones pendientes"
+msgstr ""
+
+#: modules/vacations/templates/tab-team-approvals.php:29
+msgid "No hay solicitudes pendientes en tu equipo."
+msgstr ""
+
+#: modules/vacations/templates/tab-team-approvals.php:39
+msgid "Motivo"
+msgstr ""
+
+#. translators: %d: year.
+#: modules/vacations/templates/tab-team-calendar.php:31
+#, php-format
+msgid "Calendario del equipo — %d"
+msgstr ""
+
+#: modules/vacations/templates/tab-team-calendar.php:36
+msgid "No hay vacaciones planificadas en el ámbito visible para ti."
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:142
+#: src/Admin/DepartmentsListTable.php:67
+#: src/Admin/EmployeesScreen.php:250
+#: src/Admin/WizardScreen.php:466
+#: src/Exporters/Sources/EmployeesExportSource.php:70
+msgid "Empleados"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:152
+#: src/Admin/WizardScreen.php:346
+msgid "Importar empleados"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:153
+msgid "Importar"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:165
+#: src/Admin/AdminBootstrap.php:166
+#: src/Admin/DepartmentsScreen.php:207
+msgid "Departamentos"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:179
+#: src/Admin/AdminBootstrap.php:180
+#: src/Admin/HolidaysScreen.php:201
+#: src/Admin/WizardScreen.php:467
+msgid "Festivos"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:192
+#: src/Admin/AdminBootstrap.php:193
+#: src/Admin/WizardScreen.php:368
+msgid "Importar festivos"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:204
+msgid "Ajustes Welow RRHH"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:205
+msgid "Ajustes"
+msgstr ""
+
+#: src/Admin/AdminBootstrap.php:218
+#: src/Admin/AdminBootstrap.php:219
+msgid "Asistente de configuración"
+msgstr ""
+
+#: src/Admin/DepartmentsListTable.php:64
+#: src/Admin/DepartmentsScreen.php:246
+msgid "Slug"
+msgstr ""
+
+#: src/Admin/DepartmentsListTable.php:65
+msgid "Padre"
+msgstr ""
+
+#: src/Admin/DepartmentsListTable.php:66
+#: src/Admin/DepartmentsScreen.php:267
+msgid "Manager"
+msgstr ""
+
+#: src/Admin/DepartmentsListTable.php:144
+msgid "¿Eliminar este departamento?"
+msgstr ""
+
+#: src/Admin/DepartmentsListTable.php:164
+msgid "No hay departamentos todavía."
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:138
+msgid "Departamento creado."
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:139
+msgid "Departamento actualizado."
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:140
+msgid "Departamento eliminado."
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:141
+#: src/Admin/HolidaysScreen.php:134
+msgid "Ha habido errores."
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:186
+msgid "Departamento no encontrado"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:208
+#: src/Admin/EmployeesScreen.php:251
+#: src/Admin/HolidaysScreen.php:202
+msgid "Añadir nuevo"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:223
+msgid "Editar departamento"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:223
+msgid "Nuevo departamento"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:249
+msgid "Déjalo vacío para que se genere a partir del nombre."
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:253
+msgid "Departamento padre"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:256
+msgid "— Ninguno (raíz) —"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:274
+msgid "Crear departamento"
+msgstr ""
+
+#: src/Admin/DepartmentsScreen.php:301
+#: src/Admin/EmployeesScreen.php:435
+msgid "— Sin manager —"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:69
+#: src/Admin/HolidaysImportScreen.php:62
+msgid "No se ha recibido ningún archivo."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:78
+#: src/Admin/HolidaysImportScreen.php:68
+msgid "Error subiendo el archivo."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:81
+msgid "Archivo demasiado grande (máx. 5 MB)."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:89
+#: src/Admin/HolidaysImportScreen.php:78
+msgid "Sólo se aceptan archivos .csv"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:92
+#: src/Admin/HolidaysImportScreen.php:81
+msgid "Archivo temporal no válido."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:141
+#: src/Admin/HolidaysImportScreen.php:128
+msgid "No hay un import pendiente. Vuelve a subir el archivo."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:235
+msgid "Importar empleados desde CSV"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:240
+msgid "Sube un archivo CSV con la cabecera estándar. Verás un previo (dry-run) antes de aplicar los cambios."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:244
+#: src/Admin/HolidaysImportScreen.php:226
+msgid "Descargar plantilla CSV"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:248
+msgid "La plantilla incluye una fila de ejemplo (ana@example.com). Bórrala y sustitúyela por tus datos antes de importar."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:257
+#: src/Admin/HolidaysImportScreen.php:235
+msgid "Archivo CSV"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:260
+msgid "Tamaño máximo: 5 MB. Separadores admitidos: coma o punto y coma."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:265
+#: src/Admin/HolidaysImportScreen.php:240
+msgid "Subir y previsualizar"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:279
+#: src/Admin/HolidaysImportScreen.php:254
+msgid "Sin previsualización activa"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:280
+msgid "Vuelve a subir el archivo CSV."
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:290
+#: src/Admin/HolidaysImportScreen.php:261
+msgid "Previsualización del import"
+msgstr ""
+
+#. translators: %s: filename.
+#: src/Admin/EmployeesImportScreen.php:295
+#, php-format
+msgid "Archivo: %s"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:303
+msgid "Errores de parseo:"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:315
+#: src/Admin/EmployeesImportScreen.php:366
+#: src/Admin/EmployeesImportScreen.php:406
+#: src/Admin/HolidaysImportScreen.php:263
+#: src/Admin/HolidaysImportScreen.php:301
+#: src/Admin/HolidaysImportScreen.php:336
+msgid "Resultado"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:316
+#: src/Admin/EmployeesImportScreen.php:367
+#: src/Admin/HolidaysImportScreen.php:263
+#: src/Admin/HolidaysImportScreen.php:301
+msgid "Filas"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:320
+#: src/Admin/EmployeesImportScreen.php:371
+msgid "Total"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:321
+#: src/Admin/HolidaysImportScreen.php:265
+msgid "Se crearán"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:322
+msgid "Se vincularán a usuario WP existente"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:323
+msgid "Ya existen (se omitirán)"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:324
+#: src/Admin/EmployeesImportScreen.php:375
+#: src/Admin/HolidaysImportScreen.php:267
+#: src/Admin/HolidaysImportScreen.php:305
+msgid "Errores"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:328
+#: src/Admin/EmployeesImportScreen.php:379
+#: src/Admin/HolidaysImportScreen.php:270
+#: src/Admin/HolidaysImportScreen.php:308
+msgid "Detalle por fila"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:334
+#: src/Admin/HolidaysImportScreen.php:275
+msgid "Confirmar e importar"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:351
+#: src/Admin/HolidaysImportScreen.php:292
+msgid "Sin reporte"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:361
+#: src/Admin/HolidaysImportScreen.php:299
+msgid "Reporte de importación"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:372
+#: src/Admin/HolidaysImportScreen.php:303
+msgid "Creados"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:373
+msgid "Vinculados a usuario existente"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:374
+msgid "Ya existían (omitidos)"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:384
+msgid "Volver al listado de empleados"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:387
+msgid "Importar otro archivo"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:405
+#: src/Admin/HolidaysImportScreen.php:335
+msgid "Línea"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:407
+#: src/Admin/EmployeesListTable.php:59
+#: src/Admin/EmployeesScreen.php:290
+#: src/Exporters/Sources/EmployeesExportSource.php:94
+msgid "Email"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:409
+#: src/Admin/HolidaysImportScreen.php:340
+msgid "Mensaje"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:447
+#: src/Admin/HolidaysImportScreen.php:327
+msgid "Crear"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:448
+msgid "Vincular"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:449
+#: src/Admin/HolidaysImportScreen.php:328
+msgid "Omitir"
+msgstr ""
+
+#: src/Admin/EmployeesImportScreen.php:450
+#: src/Admin/HolidaysImportScreen.php:329
+msgid "Error"
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:62
+#: src/Admin/EmployeesScreen.php:330
+#: src/Exporters/Sources/EmployeesExportSource.php:97
+#: src/Frontend/templates/tab-summary.php:35
+msgid "Cargo"
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:64
+msgid "Alta"
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:179
+msgid "¿Marcar este empleado como baja?"
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:180
+msgid "Dar de baja"
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:187
+msgid "¿Eliminar definitivamente este empleado? El usuario WP no se borrará."
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:234
+msgid "No hay empleados todavía."
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:250
+msgid "Filtrar por estado"
+msgstr ""
+
+#: src/Admin/EmployeesListTable.php:252
+msgid "Todos los estados"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:78
+#: src/Admin/EmployeesScreen.php:111
+msgid "No tienes permisos para gestionar empleados."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:173
+msgid "Empleado creado correctamente."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:174
+msgid "Empleado actualizado correctamente."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:175
+msgid "Empleado eliminado."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:176
+msgid "Empleado dado de baja."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:177
+msgid "Ha habido errores. Revisa los datos."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:212
+msgid "No tienes permisos para acceder a esta sección."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:227
+msgid "Empleado no encontrado"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:255
+msgid "Buscar"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:270
+msgid "Editar empleado"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:270
+msgid "Nuevo empleado"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:277
+msgid "Volver al listado"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:296
+msgid "El email se actualiza desde el perfil del usuario WordPress."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:308
+#: src/Exporters/Sources/EmployeesExportSource.php:93
+msgid "Apellidos"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:315
+msgid "DNI / NIE"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:319
+msgid "Almacenado cifrado en base de datos."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:323
+msgid "Código interno"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:343
+#: src/Frontend/templates/tab-summary.php:47
+msgid "Manager directo"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:349
+#: src/Exporters/Sources/EmployeesExportSource.php:99
+#: src/Frontend/templates/tab-summary.php:53
+msgid "Fecha de alta"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:356
+#: src/Exporters/Sources/EmployeesExportSource.php:101
+#: src/Frontend/templates/tab-summary.php:59
+msgid "Horas semanales"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:363
+msgid "Días de vacaciones (override)"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:367
+msgid "Deja vacío para usar el valor de empresa."
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:390
+msgid "Crear empleado"
+msgstr ""
+
+#: src/Admin/EmployeesScreen.php:407
+msgid "— Sin departamento —"
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:71
+msgid "Archivo demasiado grande (máx. 2 MB)."
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:221
+msgid "Importar festivos desde CSV"
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:223
+msgid "Sube un CSV con las columnas fecha, nombre y tipo (national/regional/local/company)."
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:266
+msgid "Ya existen (se omiten)"
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:304
+msgid "Omitidos (ya existían)"
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:312
+msgid "Volver al listado de festivos"
+msgstr ""
+
+#: src/Admin/HolidaysImportScreen.php:337
+#: src/Admin/HolidaysListTable.php:57
+#: src/Admin/HolidaysScreen.php:237
+msgid "Fecha"
+msgstr ""
+
+#: src/Admin/HolidaysListTable.php:59
+#: src/Admin/HolidaysListTable.php:188
+#: src/Admin/HolidaysScreen.php:251
+msgid "Ámbito"
+msgstr ""
+
+#: src/Admin/HolidaysListTable.php:136
+msgid "¿Eliminar este festivo?"
+msgstr ""
+
+#: src/Admin/HolidaysListTable.php:156
+msgid "No hay festivos para los filtros seleccionados."
+msgstr ""
+
+#: src/Admin/HolidaysListTable.php:178
+msgid "Todos los años"
+msgstr ""
+
+#: src/Admin/HolidaysListTable.php:190
+msgid "Todos los ámbitos"
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:131
+msgid "Festivo creado."
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:132
+msgid "Festivo actualizado."
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:133
+msgid "Festivo eliminado."
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:179
+msgid "Festivo no encontrado"
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:203
+msgid "Importar CSV"
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:221
+msgid "Editar festivo"
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:221
+msgid "Nuevo festivo"
+msgstr ""
+
+#: src/Admin/HolidaysScreen.php:267
+msgid "Crear festivo"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:104
+msgid "Ajustes guardados."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:122
+#: src/Admin/WizardScreen.php:463
+#: src/Support/Data/HolidayScope.php:60
+msgid "Empresa"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:123
+msgid "Calendario"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:126
+#: src/Frontend/Tabs/NotificationsTab.php:49
+#: src/Frontend/templates/tab-notifications.php:28
+msgid "Notificaciones"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:135
+msgid "Ajustes de Welow RRHH"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:193
+#: src/Admin/WizardScreen.php:224
+msgid "Nombre de la empresa"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:197
+#: src/Admin/WizardScreen.php:228
+msgid "CIF"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:201
+#: src/Admin/WizardScreen.php:232
+msgid "Dirección"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:205
+msgid "ID adjunto del logo"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:209
+msgid "ID de la imagen en Medios. Por ahora introduce el ID manualmente; el picker visual llegará más adelante."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:227
+msgid "Zona horaria"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:242
+msgid "Primer día de la semana"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:247
+msgid "Domingo"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:248
+msgid "Lunes"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:249
+msgid "Martes"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:250
+msgid "Miércoles"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:251
+msgid "Jueves"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:252
+msgid "Viernes"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:253
+msgid "Sábado"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:266
+#: src/Admin/WizardScreen.php:236
+msgid "Comunidad Autónoma"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:296
+#: src/Admin/WizardScreen.php:271
+msgid "Días por defecto al año"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:300
+msgid "Cómputo"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:303
+msgid "Días laborables"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:304
+msgid "Días naturales"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:309
+msgid "Arrastre de días no usados"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:315
+#: src/Admin/WizardScreen.php:279
+msgid "Máx. días arrastrables"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:319
+msgid "Fecha límite arrastre (MM-DD)"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:323
+msgid "Días mínimos de antelación"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:327
+msgid "Máx. días consecutivos por solicitud"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:331
+#: src/Admin/WizardScreen.php:283
+msgid "Flujo de aprobación"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:333
+msgid "Define hasta 4 niveles secuenciales. Roles válidos: manager_direct, hr, admin. Para usuario específico usa user:ID."
+msgstr ""
+
+#. translators: %d level number
+#: src/Admin/SettingsScreen.php:337
+#: src/Admin/WizardScreen.php:288
+#, php-format
+msgid "Nivel %d:"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:339
+#: src/Admin/WizardScreen.php:290
+msgid "— Sin nivel —"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:347
+msgid "Si pones \"user:42\" en el segundo input, sustituye al rol canónico."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:379
+#: src/Admin/WizardScreen.php:321
+msgid "Restricciones"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:381
+msgid "Exigir geolocalización al fichar"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:382
+msgid "Exigir IP en la lista permitida"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:386
+msgid "Lista de IPs permitidas"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:388
+msgid "Una IP por línea. Se ignoran las inválidas."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:391
+msgid "Radio geo por defecto (metros)"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:395
+msgid "Ubicaciones de oficina"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:398
+msgid "Una por línea con formato: nombre|lat|lng|radio. También se acepta JSON."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:402
+msgid "Día de cierre automático mensual"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:404
+msgid "Día del mes en que se cierra el mes anterior y deja los registros en sólo-lectura."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:407
+msgid "Aviso si jornada supera (horas)"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:411
+msgid "Pausa obligatoria tras (horas)"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:428
+msgid "Nombre remitente email"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:430
+msgid "Si está vacío, se usa el nombre del sitio."
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:433
+msgid "Email remitente"
+msgstr ""
+
+#: src/Admin/SettingsScreen.php:435
+msgid "Si está vacío, se usa el del admin de WordPress."
+msgstr ""
+
+#: src/Admin/WizardScreen.php:167
+msgid "Asistente de configuración — Welow RRHH"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:219
+msgid "Datos de la empresa"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:266
+msgid "Configuración de vacaciones"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:275
+msgid "Arrastre al año siguiente"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:276
+msgid "Permitir"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:297
+msgid "manager_direct = manager directo del empleado · hr = cualquier RRHH · admin = administrador Welow."
+msgstr ""
+
+#: src/Admin/WizardScreen.php:316
+msgid "Configuración de fichajes"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:323
+msgid "Exigir geolocalización"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:324
+msgid "Exigir IP en lista permitida"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:328
+msgid "Lista de IPs (una por línea)"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:332
+msgid "Podrás añadir ubicaciones de oficina con coordenadas más adelante desde Ajustes → Fichajes."
+msgstr ""
+
+#: src/Admin/WizardScreen.php:347
+msgid "Puedes importar empleados desde un CSV ahora mismo, o saltar este paso y darlos de alta manualmente más adelante."
+msgstr ""
+
+#: src/Admin/WizardScreen.php:350
+msgid "Abrir importador de empleados (nueva pestaña)"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:369
+msgid "Carga el calendario de festivos del año en curso. Puedes saltar este paso y añadirlos a mano luego."
+msgstr ""
+
+#: src/Admin/WizardScreen.php:372
+msgid "Abrir importador de festivos (nueva pestaña)"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:393
+msgid "¡Welow RRHH está listo!"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:394
+msgid "La configuración inicial se ha completado correctamente. Puedes ajustar cualquier opción en cualquier momento desde el menú lateral."
+msgstr ""
+
+#: src/Admin/WizardScreen.php:396
+msgid "Ir a Empleados"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:397
+msgid "Abrir Ajustes"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:398
+msgid "Volver a ejecutar el wizard"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:430
+msgid "Saltar este paso"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:436
+msgid "Finalizar"
+msgstr ""
+
+#: src/Admin/WizardScreen.php:437
+msgid "Guardar y continuar →"
+msgstr ""
+
+#: src/Departments/DepartmentService.php:80
+#: src/Departments/DepartmentService.php:138
+msgid "Ya existe un departamento con ese slug."
+msgstr ""
+
+#: src/Departments/DepartmentService.php:94
+msgid "Departamento creado pero no recuperable."
+msgstr ""
+
+#: src/Departments/DepartmentService.php:120
+#: src/Departments/DepartmentService.php:191
+msgid "Departamento no encontrado."
+msgstr ""
+
+#: src/Departments/DepartmentService.php:148
+msgid "La jerarquía generaría un ciclo."
+msgstr ""
+
+#. translators: %d: number of employees.
+#: src/Departments/DepartmentService.php:200
+#, php-format
+msgid "No se puede eliminar: el departamento tiene %d empleado asignado."
+msgid_plural "No se puede eliminar: el departamento tiene %d empleados asignados."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Departments/DepartmentService.php:212
+msgid "No se pudo eliminar el departamento."
+msgstr ""
+
+#: src/Departments/DepartmentService.php:243
+msgid "El nombre del departamento es obligatorio."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:116
+#: src/Employees/EmployeeService.php:203
+msgid "Empleado creado pero no recuperable."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:156
+msgid "Usuario WordPress no encontrado."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:162
+msgid "Este usuario ya está vinculado a un empleado."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:177
+#: src/Employees/EmployeeService.php:408
+#: src/Employees/EmployeeService.php:444
+msgid "Ya existe un empleado con ese código."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:183
+#: src/Employees/EmployeeService.php:415
+#: src/Employees/EmployeeService.php:453
+msgid "Ya existe un empleado con ese DNI/NIE."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:233
+#: src/Employees/EmployeeService.php:317
+#: src/Employees/EmployeeService.php:356
+msgid "Empleado no encontrado."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:283
+msgid "Empleado no recuperable tras actualizar."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:361
+msgid "No se pudo eliminar el empleado."
+msgstr ""
+
+#: src/Employees/EmployeeService.php:402
+#: src/Employees/EmployeeService.php:436
+msgid "Ya existe un usuario con ese email."
+msgstr ""
+
+#: src/Exporters/Exporter.php:133
+msgid "Se requiere usuario autenticado."
+msgstr ""
+
+#: src/Exporters/Exporter.php:141
+msgid "Fuente de exportación no registrada."
+msgstr ""
+
+#: src/Exporters/Exporter.php:145
+msgid "No tienes permisos para exportar esta fuente."
+msgstr ""
+
+#: src/Exporters/Exporter.php:150
+msgid "Formato de exportación no disponible."
+msgstr ""
+
+#: src/Exporters/Exporter.php:157
+msgid "El driver solicitado no está disponible y no hay fallback a CSV."
+msgstr ""
+
+#: src/Exporters/Sources/EmployeesExportSource.php:100
+msgid "Fecha de baja"
+msgstr ""
+
+#: src/Exporters/Sources/EmployeesExportSource.php:102
+msgid "Días vac. (override)"
+msgstr ""
+
+#: src/Frontend/Dashboard.php:65
+msgid "No hay tabs disponibles para tu usuario."
+msgstr ""
+
+#: src/Frontend/Frontend.php:117
+msgid "Mi área"
+msgstr ""
+
+#: src/Frontend/Tabs/SummaryTab.php:62
+#: src/Frontend/templates/tab-summary.php:21
+msgid "Mi resumen"
+msgstr ""
+
+#. translators: %s: display name.
+#: src/Frontend/templates/dashboard.php:26
+#, php-format
+msgid "Hola, %s"
+msgstr ""
+
+#: src/Frontend/templates/dashboard.php:31
+msgid "Secciones del dashboard"
+msgstr ""
+
+#: src/Frontend/templates/login-required.php:15
+msgid "Necesitas iniciar sesión para acceder a tu área."
+msgstr ""
+
+#: src/Frontend/templates/login-required.php:23
+msgid "Iniciar sesión"
+msgstr ""
+
+#: src/Frontend/templates/tab-notifications.php:35
+msgid "Todas"
+msgstr ""
+
+#: src/Frontend/templates/tab-notifications.php:38
+msgid "No leídas"
+msgstr ""
+
+#: src/Frontend/templates/tab-notifications.php:42
+msgid "Marcar todo como leído"
+msgstr ""
+
+#: src/Frontend/templates/tab-notifications.php:50
+msgid "No hay notificaciones por aquí."
+msgstr ""
+
+#: src/Frontend/templates/tab-notifications.php:58
+msgid "Notificación"
+msgstr ""
+
+#: src/Frontend/templates/tab-notifications.php:61
+msgid "Ver"
+msgstr ""
+
+#. translators: %s: human-readable time difference.
+#: src/Frontend/templates/tab-notifications.php:69
+#, php-format
+msgid "hace %s"
+msgstr ""
+
+#: src/Frontend/templates/tab-summary.php:25
+msgid "Tu usuario aún no está vinculado a un empleado de Welow RRHH. Pide a RRHH que te dé de alta."
+msgstr ""
+
+#. translators: %s: weekly hours.
+#: src/Frontend/templates/tab-summary.php:63
+#, php-format
+msgid "%s h"
+msgstr ""
+
+#: src/Frontend/templates/tab-summary.php:71
+msgid "Próximamente: resumen de horas trabajadas y saldo de vacaciones (cuando se activen los módulos correspondientes)."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:73
+msgid "Ya existe un festivo con esa fecha y ámbito."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:107
+#: src/Holidays/HolidayService.php:169
+msgid "Festivo no encontrado."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:123
+msgid "Ya existe otro festivo con esa fecha y ámbito."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:172
+msgid "No se pudo eliminar el festivo."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:207
+msgid "Fecha inválida (use YYYY-MM-DD)."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:215
+msgid "El nombre del festivo es obligatorio."
+msgstr ""
+
+#: src/Holidays/HolidayService.php:221
+msgid "Ámbito no válido. Valores: national, regional, local, company."
+msgstr ""
+
+#: src/Importers/EmployeeCsvParser.php:60
+#: src/Importers/HolidayCsvParser.php:43
+msgid "No se puede leer el archivo subido."
+msgstr ""
+
+#: src/Importers/EmployeeCsvParser.php:68
+#: src/Importers/HolidayCsvParser.php:51
+msgid "No se pudo abrir el archivo."
+msgstr ""
+
+#: src/Importers/EmployeeCsvParser.php:94
+#: src/Importers/HolidayCsvParser.php:74
+msgid "El CSV está vacío."
+msgstr ""
+
+#. translators: %s: column name.
+#: src/Importers/EmployeeCsvParser.php:111
+#: src/Importers/HolidayCsvParser.php:101
+#, php-format
+msgid "Falta la columna requerida: %s"
+msgstr ""
+
+#. translators: 1: line number, 2: expected columns, 3: found columns.
+#: src/Importers/EmployeeCsvParser.php:133
+#: src/Importers/HolidayCsvParser.php:121
+#, php-format
+msgid "Línea %1$d: número de columnas inválido (esperado %2$d, encontrado %3$d)."
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:150
+msgid "Email inválido o vacío."
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:163
+msgid "(aviso: manager_email no encontrado, se crea sin manager)"
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:172
+msgid "Creará usuario WP nuevo y empleado."
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:180
+msgid "Ya existe un empleado con ese email; se omite."
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:192
+msgid "Vinculará el usuario WP existente al nuevo empleado."
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:239
+msgid "Resultado inesperado del servicio."
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:252
+msgid "first_name vacío"
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:255
+msgid "last_name vacío"
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:258
+msgid "DNI/NIE no válido"
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:261
+msgid "hire_date inválida (use YYYY-MM-DD)"
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:266
+msgid "weekly_hours fuera de rango"
+msgstr ""
+
+#: src/Importers/EmployeeImporter.php:272
+msgid "vacation_days_override fuera de rango"
+msgstr ""
+
+#: src/Importers/HolidayImporter.php:133
+msgid "Fecha vacía."
+msgstr ""
+
+#: src/Importers/HolidayImporter.php:137
+msgid "Fecha con formato inválido (use YYYY-MM-DD)."
+msgstr ""
+
+#: src/Importers/HolidayImporter.php:140
+msgid "Nombre del festivo vacío."
+msgstr ""
+
+#: src/Importers/HolidayImporter.php:146
+msgid "Ámbito inválido (national/regional/local/company)."
+msgstr ""
+
+#: src/Importers/HolidayImporter.php:151
+msgid "Ya existe; se omite."
+msgstr ""
+
+#: src/Importers/HolidayImporter.php:154
+msgid "Crear festivo."
+msgstr ""
+
+#. translators: %s: module slug.
+#: src/Modules/ModuleRegistry.php:227
+#: src/Modules/ModuleRegistry.php:282
+#, php-format
+msgid "Módulo \"%s\" no encontrado."
+msgstr ""
+
+#. translators: 1: module slug, 2: missing dependency slug.
+#: src/Modules/ModuleRegistry.php:239
+#, php-format
+msgid "El módulo \"%1$s\" requiere \"%2$s\" activo."
+msgstr ""
+
+#. translators: 1: module slug being deactivated, 2: dependent module slug.
+#: src/Modules/ModuleRegistry.php:300
+#, php-format
+msgid "No se puede desactivar \"%1$s\": el módulo \"%2$s\" depende de él."
+msgstr ""
+
+#: src/REST/AbstractController.php:85
+msgid "Error desconocido."
+msgstr ""
+
+#: src/REST/Controllers/NotificationsController.php:140
+msgid "Notificación no encontrada o no te pertenece."
+msgstr ""
+
+#: src/Roles/Capabilities.php:87
+msgid "Empleado (Welow)"
+msgstr ""
+
+#: src/Roles/Capabilities.php:93
+msgid "Manager (Welow)"
+msgstr ""
+
+#: src/Roles/Capabilities.php:99
+msgid "RRHH (Welow)"
+msgstr ""
+
+#: src/Roles/Capabilities.php:109
+msgid "Admin Welow RRHH"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:31
+msgid "Andalucía"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:32
+msgid "Aragón"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:33
+msgid "Asturias"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:34
+msgid "Illes Balears"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:35
+msgid "Canarias"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:36
+msgid "Cantabria"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:37
+msgid "Castilla y León"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:38
+msgid "Castilla-La Mancha"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:39
+msgid "Cataluña"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:40
+msgid "Extremadura"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:41
+msgid "Galicia"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:42
+msgid "Madrid"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:43
+msgid "Murcia"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:44
+msgid "Navarra"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:45
+msgid "País Vasco"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:46
+msgid "La Rioja"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:47
+msgid "Comunidad Valenciana"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:48
+msgid "Ceuta"
+msgstr ""
+
+#: src/Settings/SettingsSanitizer.php:49
+msgid "Melilla"
+msgstr ""
+
+#: src/Support/Data/EmployeeStatus.php:59
+msgid "Activo"
+msgstr ""
+
+#: src/Support/Data/EmployeeStatus.php:61
+msgid "Inactivo"
+msgstr ""
+
+#: src/Support/Data/EmployeeStatus.php:63
+msgid "De baja"
+msgstr ""
+
+#: src/Support/Data/HolidayScope.php:54
+msgid "Nacional"
+msgstr ""
+
+#: src/Support/Data/HolidayScope.php:56
+msgid "Autonómico"
+msgstr ""
+
+#: src/Support/Data/HolidayScope.php:58
+msgid "Local"
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:39
+msgid "Email no válido."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:70
+msgid "El nombre no puede estar vacío."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:77
+msgid "Los apellidos no pueden estar vacíos."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:84
+msgid "DNI/NIE no válido (formato o letra de control incorrecta)."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:90
+msgid "Fecha de alta no válida (formato YYYY-MM-DD)."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:96
+msgid "Fecha de baja no válida (formato YYYY-MM-DD)."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:103
+msgid "Horas semanales fuera de rango (0-168)."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:110
+msgid "Días de vacaciones fuera de rango (0-365)."
+msgstr ""
+
+#: src/Support/Validation/EmployeeValidator.php:116
+msgid "Estado no válido."
+msgstr ""
+
+#: templates/emails/generic/html.php:12
+msgid "Aviso"
+msgstr ""
+
+#: templates/emails/generic/html.php:15
+#: templates/emails/generic/text.php:13
+msgid "Ver detalle"
+msgstr ""
+
+#: templates/emails/generic/subject.php:10
+msgid "Notificación de Welow RRHH"
+msgstr ""
+
+#: templates/emails/generic/text.php:10
+msgid "Aviso de Welow RRHH"
+msgstr ""
+
+#. translators: %s: brand name.
+#: templates/emails/layout.php:56
+#, php-format
+msgid "Notificación automática de %s. Si lo recibiste por error, ignora este mensaje."
+msgstr ""
+
+#: welow-rrhh.php:52
+msgid "Welow RRHH no puede arrancar: falta el autoload de Composer. Ejecuta \"composer install --no-dev\" en la carpeta del plugin."
+msgstr ""

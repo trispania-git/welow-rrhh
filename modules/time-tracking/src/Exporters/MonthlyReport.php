@@ -285,8 +285,10 @@ final class MonthlyReport {
 		$html .= '<div class="footer">';
 		$html .= self::e( __( 'Documento generado conforme al Real Decreto-ley 8/2019, de 8 de marzo, de medidas urgentes de protección social y de lucha contra la precariedad laboral en la jornada de trabajo.', 'welow-rrhh' ) );
 		$html .= '<br>';
-		$html .= self::e( sprintf( __( 'Generado el %s', 'welow-rrhh' ), wp_date( 'Y-m-d H:i' ) ) ); // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-		$html .= '</div>';
+		/* translators: %s: timestamp in Y-m-d H:i format. */
+		$gen_tpl = __( 'Generado el %s', 'welow-rrhh' );
+		$html   .= self::e( sprintf( $gen_tpl, wp_date( 'Y-m-d H:i' ) ) );
+		$html   .= '</div>';
 
 		$html .= '</body></html>';
 		return $html;
