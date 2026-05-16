@@ -180,6 +180,21 @@ final class TimeEntryService {
 			return new \WP_Error( 'welow_time_entry_reason_required', __( 'Indica el motivo de la edición.', 'welow-rrhh' ) );
 		}
 
+		/**
+		 * Permite vetar la edición de un evento concreto (ej. ClosureGuard).
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param true|\WP_Error      $allowed   Estado previo.
+		 * @param TimeEntry           $current   Evento actual.
+		 * @param int                 $editor_id Editor.
+		 * @param string              $reason    Motivo de edición.
+		 */
+		$gate = apply_filters( 'welow_rrhh/time_tracking/can_edit_entry', true, $current, $editor_id, $reason );
+		if ( is_wp_error( $gate ) ) {
+			return $gate;
+		}
+
 		$prepared = self::prepare_changes( $changes );
 		if ( empty( $prepared ) ) {
 			return new \WP_Error( 'welow_time_entry_no_changes', __( 'No se han indicado cambios.', 'welow-rrhh' ) );
@@ -229,6 +244,21 @@ final class TimeEntryService {
 		if ( null === $current ) {
 			return new \WP_Error( 'welow_time_entry_not_found', __( 'Evento no encontrado.', 'welow-rrhh' ) );
 		}
+
+		/**
+		 * Permite vetar el borrado (ej. ClosureGuard).
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param true|\WP_Error $allowed  Estado previo.
+		 * @param TimeEntry      $current  Evento.
+		 * @param int            $actor_id Actor.
+		 */
+		$gate = apply_filters( 'welow_rrhh/time_tracking/can_delete_entry', true, $current, $actor_id );
+		if ( is_wp_error( $gate ) ) {
+			return $gate;
+		}
+
 		$reason_clean = sanitize_text_field( $reason );
 		if ( '' === $reason_clean ) {
 			return new \WP_Error( 'welow_time_entry_reason_required', __( 'Indica el motivo del borrado.', 'welow-rrhh' ) );

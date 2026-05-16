@@ -16,6 +16,9 @@ namespace Welow\RRHH\Modules\TimeTracking;
 use Welow\RRHH\Container;
 use Welow\RRHH\Frontend\Frontend as CoreFrontend;
 use Welow\RRHH\Modules\AbstractModule;
+use Welow\RRHH\Modules\TimeTracking\Admin\AdminBootstrap as TimeTrackingAdmin;
+use Welow\RRHH\Modules\TimeTracking\Closure\ClosureGuard;
+use Welow\RRHH\Modules\TimeTracking\Closure\MonthClosure;
 use Welow\RRHH\Modules\TimeTracking\Frontend\MyTimeEntriesTab;
 use Welow\RRHH\Modules\TimeTracking\Frontend\PunchTab;
 use Welow\RRHH\Modules\TimeTracking\Policy\PunchGuard;
@@ -160,6 +163,27 @@ final class Module extends AbstractModule {
 
 		// Engancha guard al filtro can_punch (9.B).
 		$container->get( 'time_tracking.punch_guard' )->register_hooks();
+
+		// Cierre de mes (9.D).
+		$container->set(
+			'time_tracking.month_closure',
+			static function ( Container $c ): MonthClosure {
+				return new MonthClosure( $c->get( 'audit.logger' ) );
+			}
+		);
+		$container->set(
+			'time_tracking.closure_guard',
+			static function ( Container $c ): ClosureGuard {
+				return new ClosureGuard( $c->get( 'time_tracking.month_closure' ) );
+			}
+		);
+		$container->get( 'time_tracking.closure_guard' )->register_hooks();
+
+		// Admin del módulo (lista, edición, cierre de mes) — sólo cuando is_admin.
+		if ( is_admin() ) {
+			$admin = new TimeTrackingAdmin( $container );
+			$admin->register_hooks();
+		}
 
 		// Registra controller REST vía filtro del Core.
 		add_filter(
