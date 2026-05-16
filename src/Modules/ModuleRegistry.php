@@ -336,9 +336,12 @@ class ModuleRegistry {
 	/**
 	 * Carga el archivo Module.php de un módulo y devuelve la instancia.
 	 *
-	 * Espera que el archivo contenga exactamente una clase concreta que
-	 * implemente ModuleInterface. Si declara varias se toma la primera nueva
-	 * tras el require.
+	 * Estrategia:
+	 *   1) require_once del Module.php.
+	 *   2) Intentamos resolver por convención: para un slug "time-tracking"
+	 *      esperamos la clase \Welow\RRHH\Modules\TimeTracking\Module.
+	 *   3) Como fallback (para módulos que no respeten la convención),
+	 *      buscamos cualquier clase nueva declarada por el require.
 	 *
 	 * @param string $file Ruta absoluta a modules/<slug>/Module.php.
 	 * @param string $slug Slug derivado del nombre de la carpeta.
@@ -348,8 +351,21 @@ class ModuleRegistry {
 		$classes_before = get_declared_classes();
 		require_once $file;
 		$classes_after = get_declared_classes();
-		$new_classes   = array_diff( $classes_after, $classes_before );
 
+		$url = WELOW_RRHH_PLUGIN_URL . 'modules/' . $slug;
+
+		// 1) Convención FQN: Welow\RRHH\Modules\<PascalCase>\Module.
+		$pascal = str_replace( ' ', '', ucwords( str_replace( array( '-', '_' ), ' ', $slug ) ) );
+		$fqn    = '\\Welow\\RRHH\\Modules\\' . $pascal . '\\Module';
+		if ( class_exists( $fqn ) ) {
+			$reflection = new \ReflectionClass( $fqn );
+			if ( ! $reflection->isAbstract() && $reflection->implementsInterface( ModuleInterface::class ) ) {
+				return new $fqn( dirname( $file ), $url );
+			}
+		}
+
+		// 2) Fallback: primera clase concreta nueva que implemente ModuleInterface.
+		$new_classes = array_diff( $classes_after, $classes_before );
 		foreach ( $new_classes as $class ) {
 			if ( ! is_subclass_of( $class, ModuleInterface::class ) ) {
 				continue;
@@ -358,7 +374,6 @@ class ModuleRegistry {
 			if ( $reflection->isAbstract() ) {
 				continue;
 			}
-			$url = WELOW_RRHH_PLUGIN_URL . 'modules/' . $slug;
 			return new $class( dirname( $file ), $url );
 		}
 
