@@ -16,13 +16,17 @@ declare( strict_types=1 );
 namespace Welow\RRHH\Modules\Vacations;
 
 use Welow\RRHH\Container;
+use Welow\RRHH\Frontend\Frontend as CoreFrontend;
 use Welow\RRHH\Modules\AbstractModule;
 use Welow\RRHH\Modules\Vacations\Config\VacationYearsConfig;
+use Welow\RRHH\Modules\Vacations\Frontend\MyVacationsTab;
+use Welow\RRHH\Modules\Vacations\Frontend\TeamApprovalsTab;
+use Welow\RRHH\Modules\Vacations\Frontend\TeamCalendarTab;
+use Welow\RRHH\Modules\Vacations\Notifications\VacationNotifications;
+use Welow\RRHH\Modules\Vacations\REST\VacationsController;
 use Welow\RRHH\Modules\Vacations\Repository\VacationBalanceRepository;
 use Welow\RRHH\Modules\Vacations\Repository\VacationRequestRepository;
 use Welow\RRHH\Modules\Vacations\Schema\VacationsSchema;
-use Welow\RRHH\Modules\Vacations\Notifications\VacationNotifications;
-use Welow\RRHH\Modules\Vacations\REST\VacationsController;
 use Welow\RRHH\Modules\Vacations\Service\ApprovalService;
 use Welow\RRHH\Modules\Vacations\Service\BalanceCalculator;
 use Welow\RRHH\Modules\Vacations\Service\RequestService;
@@ -210,6 +214,26 @@ final class Module extends AbstractModule {
 			}
 		);
 
+		// Tabs del dashboard frontend (10.E).
+		add_filter(
+			'welow_rrhh/dashboard/tabs',
+			static function ( array $tabs ) use ( $container ): array {
+				$service    = $container->get( 'vacations.request_service' );
+				$calculator = $container->get( 'vacations.balance_calculator' );
+				$years      = $container->get( 'vacations.years_config' );
+				$employees  = $container->get( 'employees.repository' );
+				$extra      = array(
+					new MyVacationsTab( $service, $calculator, $years ),
+					new TeamApprovalsTab( $service, $employees ),
+					new TeamCalendarTab( $service, $employees ),
+				);
+				return array_merge( $tabs, $extra );
+			}
+		);
+
+		// Encola assets del módulo si la página renderiza el shortcode del dashboard.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 20 );
+
 		/**
 		 * Disparado cuando el módulo Vacaciones ha terminado de arrancar.
 		 *
@@ -222,5 +246,35 @@ final class Module extends AbstractModule {
 		 * @param Container $container Container del Core.
 		 */
 		do_action( 'welow_rrhh/vacations/booted', $container );
+	}
+
+	/**
+	 * Carga CSS+JS del módulo si la página renderiza el shortcode del dashboard.
+	 *
+	 * @return void
+	 */
+	public function enqueue_frontend_assets(): void {
+		if ( ! is_singular() ) {
+			return;
+		}
+		$post = get_post();
+		if ( ! $post || ! has_shortcode( (string) $post->post_content, CoreFrontend::SHORTCODE ) ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'welow-vacations',
+			WELOW_RRHH_PLUGIN_URL . 'modules/vacations/assets/css/vacations.css',
+			array( 'welow-rrhh-frontend' ),
+			WELOW_RRHH_VERSION
+		);
+
+		wp_enqueue_script(
+			'welow-vacations',
+			WELOW_RRHH_PLUGIN_URL . 'modules/vacations/assets/js/vacations.js',
+			array( 'jquery', 'welow-rrhh-frontend' ),
+			WELOW_RRHH_VERSION,
+			true
+		);
 	}
 }

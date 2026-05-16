@@ -1,0 +1,150 @@
+/**
+ * Welow RRHH — estilos del módulo Vacaciones.
+ *
+ * Estilos sobrios, sin frameworks externos. Branding por defecto en azul
+ * neutro; los integradores pueden sobreescribir.
+ */
+
+.welow-vac__balance {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin: 12px 0 18px;
+}
+.welow-vac__balance-tile {
+	flex: 1 1 140px;
+	min-width: 120px;
+	padding: 10px 12px;
+	background: #f6f7f7;
+	border-left: 3px solid #2271b1;
+	border-radius: 3px;
+}
+.welow-vac__balance-tile--available {
+	border-left-color: #16a34a;
+	background: #effff4;
+}
+.welow-vac__balance-label {
+	display: block;
+	font-size: 12px;
+	color: #555;
+	margin-bottom: 4px;
+}
+.welow-vac__balance-value {
+	font-size: 22px;
+	color: #1d2327;
+}
+.welow-vac__balance-value small {
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	color: #777;
+}
+
+.welow-vac__form {
+	margin: 16px 0;
+	padding: 14px;
+	background: #fcfcfd;
+	border: 1px solid #e2e4e7;
+	border-radius: 4px;
+}
+.welow-vac__form-title {
+	margin: 0 0 10px;
+	font-size: 14px;
+}
+.welow-vac__form-row {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+	align-items: flex-end;
+}
+.welow-vac__form-row label {
+	display: flex;
+	flex-direction: column;
+	font-size: 13px;
+	gap: 4px;
+}
+.welow-vac__form-row input[type="date"],
+.welow-vac__form-row textarea {
+	padding: 6px 8px;
+	border: 1px solid #c3c4c7;
+	border-radius: 3px;
+	font-size: 13px;
+}
+.welow-vac__checkbox {
+	flex-direction: row !important;
+	align-items: center;
+}
+.welow-vac__checkbox input {
+	margin-right: 6px;
+}
+.welow-vac__textarea {
+	flex: 1 1 100%;
+}
+.welow-vac__textarea textarea {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.welow-vac__btn {
+	padding: 6px 12px;
+	border: 1px solid #2271b1;
+	background: #fff;
+	color: #2271b1;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 13px;
+}
+.welow-vac__btn:hover { background: #f0f6fc; }
+.welow-vac__btn--primary { background: #2271b1; color: #fff; }
+.welow-vac__btn--primary:hover { background: #135e96; }
+.welow-vac__btn--ghost { border-color: #c3c4c7; color: #50575e; }
+.welow-vac__btn[disabled] { opacity: 0.55; cursor: progress; }
+
+.welow-vac__feedback-msg {
+	display: inline-block;
+	padding: 3px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+.welow-vac__feedback-msg--info    { background: #f0f6fc; color: #2271b1; }
+.welow-vac__feedback-msg--success { background: #effff4; color: #16a34a; }
+.welow-vac__feedback-msg--error   { background: #fef1f1; color: #b32d2e; }
+
+.welow-vac__list { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.welow-vac__list th,
+.welow-vac__list td { border: 1px solid #e2e4e7; padding: 6px 8px; text-align: left; }
+.welow-vac__list th { background: #f6f7f7; }
+
+.welow-vac__status {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 600;
+}
+.welow-vac__status--pending   { background: #fff5e6; color: #b45309; }
+.welow-vac__status--approved  { background: #effff4; color: #166534; }
+.welow-vac__status--rejected  { background: #fef1f1; color: #b32d2e; }
+.welow-vac__status--cancelled { background: #f0f0f0; color: #555;    }
+
+.welow-vac__note {
+	display: block;
+	font-size: 11px;
+	color: #777;
+	font-style: italic;
+}
+
+.welow-vac__row-actions { white-space: nowrap; }
+
+.welow-vac__month-title {
+	margin: 16px 0 6px;
+	font-size: 14px;
+	color: #2271b1;
+	text-transform: capitalize;
+}
+
+.welow-vac__list-title {
+	margin: 18px 0 8px;
+	font-size: 14px;
+}
