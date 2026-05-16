@@ -27,7 +27,8 @@
 	"autoload": {
 		"psr-4": {
 			"Welow\\RRHH\\": "src/",
-			"Welow\\RRHH\\Modules\\TimeTracking\\": "modules/time-tracking/src/"
+			"Welow\\RRHH\\Modules\\TimeTracking\\": "modules/time-tracking/src/",
+			"Welow\\RRHH\\Modules\\Vacations\\": "modules/vacations/src/"
 		}
 	},
 	"autoload-dev": {
