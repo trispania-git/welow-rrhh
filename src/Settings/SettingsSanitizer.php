@@ -108,6 +108,7 @@ final class SettingsSanitizer {
 	public static function sanitize_vacations( array $data ): array {
 		$out = array(
 			'default_days_per_year'   => self::int_in_range( $data['default_days_per_year'] ?? 22, 0, 365, 22 ),
+			'accrual_policy'          => self::enum_in( $data['accrual_policy'] ?? 'full_year', array( 'full_year', 'prorated' ), 'full_year' ),
 			'computation'             => self::enum_in( $data['computation'] ?? 'working_days', array( 'working_days', 'natural_days' ), 'working_days' ),
 			'allow_carry_over'        => ! empty( $data['allow_carry_over'] ),
 			'carry_over_max_days'     => self::int_in_range( $data['carry_over_max_days'] ?? 5, 0, 365, 5 ),

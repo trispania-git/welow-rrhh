@@ -106,6 +106,37 @@ final class HolidayRepository extends AbstractRepository {
 	}
 
 	/**
+	 * Devuelve las fechas (YYYY-MM-DD) con festivos en un rango,
+	 * opcionalmente filtrando por scopes.
+	 *
+	 * Pensado para sumadores que sólo necesitan saber qué días son festivos
+	 * (no el detalle de cada Holiday). Mucho más barato que paginar.
+	 *
+	 * @param \DateTimeImmutable $from   Desde (inclusive).
+	 * @param \DateTimeImmutable $to     Hasta (inclusive).
+	 * @param string[]           $scopes Scopes a incluir; vacío = todos.
+	 * @return string[] Lista de fechas únicas YYYY-MM-DD.
+	 */
+	public function find_dates_in_range( \DateTimeImmutable $from, \DateTimeImmutable $to, array $scopes = array() ): array {
+		$table  = $this->table();
+		$where  = array( 'holiday_date >= %s', 'holiday_date <= %s' );
+		$params = array( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
+		$scopes = array_values( array_unique( array_filter( array_map( 'strval', $scopes ) ) ) );
+		if ( ! empty( $scopes ) ) {
+			$placeholders = implode( ',', array_fill( 0, count( $scopes ), '%s' ) );
+			$where[]      = 'scope IN (' . $placeholders . ')';
+			foreach ( $scopes as $s ) {
+				$params[] = $s;
+			}
+		}
+		$where_sql = implode( ' AND ', $where );
+		$query     = "SELECT DISTINCT holiday_date FROM {$table} WHERE {$where_sql}"; // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$dates = $this->wpdb->get_col( $this->wpdb->prepare( $query, $params ) );
+		return is_array( $dates ) ? array_map( 'strval', $dates ) : array();
+	}
+
+	/**
 	 * Devuelve los años distintos con festivos registrados (para el filtro).
 	 *
 	 * @return int[]

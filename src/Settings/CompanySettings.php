@@ -53,6 +53,7 @@ final class CompanySettings {
 			),
 			self::SECTION_VACATIONS     => array(
 				'default_days_per_year'   => 22,
+				'accrual_policy'          => 'full_year',
 				'computation'             => 'working_days',
 				'allow_carry_over'        => true,
 				'carry_over_max_days'     => 5,

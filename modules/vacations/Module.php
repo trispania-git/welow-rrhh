@@ -21,6 +21,8 @@ use Welow\RRHH\Modules\Vacations\Config\VacationYearsConfig;
 use Welow\RRHH\Modules\Vacations\Repository\VacationBalanceRepository;
 use Welow\RRHH\Modules\Vacations\Repository\VacationRequestRepository;
 use Welow\RRHH\Modules\Vacations\Schema\VacationsSchema;
+use Welow\RRHH\Modules\Vacations\Service\BalanceCalculator;
+use Welow\RRHH\Modules\Vacations\Service\RequestService;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -120,6 +122,33 @@ final class Module extends AbstractModule {
 			'vacations.years_config',
 			static function (): VacationYearsConfig {
 				return new VacationYearsConfig();
+			}
+		);
+
+		$container->set(
+			'vacations.balance_calculator',
+			static function ( Container $c ): BalanceCalculator {
+				return new BalanceCalculator(
+					$c->get( 'vacations.request_repository' ),
+					$c->get( 'vacations.balance_repository' ),
+					$c->get( 'employees.repository' ),
+					$c->get( 'holidays.repository' ),
+					$c->get( 'vacations.years_config' ),
+					$c->get( 'settings.company' )
+				);
+			}
+		);
+
+		$container->set(
+			'vacations.request_service',
+			static function ( Container $c ): RequestService {
+				return new RequestService(
+					$c->get( 'vacations.request_repository' ),
+					$c->get( 'vacations.balance_calculator' ),
+					$c->get( 'vacations.years_config' ),
+					$c->get( 'settings.company' ),
+					$c->get( 'audit.logger' )
+				);
 			}
 		);
 
