@@ -18,6 +18,7 @@ namespace Welow\RRHH\Modules\Vacations;
 use Welow\RRHH\Container;
 use Welow\RRHH\Frontend\Frontend as CoreFrontend;
 use Welow\RRHH\Modules\AbstractModule;
+use Welow\RRHH\Modules\Vacations\Admin\AdminBootstrap as VacationsAdmin;
 use Welow\RRHH\Modules\Vacations\Config\VacationYearsConfig;
 use Welow\RRHH\Modules\Vacations\Frontend\MyVacationsTab;
 use Welow\RRHH\Modules\Vacations\Frontend\TeamApprovalsTab;
@@ -233,6 +234,12 @@ final class Module extends AbstractModule {
 
 		// Encola assets del módulo si la página renderiza el shortcode del dashboard.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 20 );
+
+		// Admin del módulo (lista + config años) — sólo cuando is_admin.
+		if ( is_admin() ) {
+			$admin = new VacationsAdmin( $container );
+			$admin->register_hooks();
+		}
 
 		/**
 		 * Disparado cuando el módulo Vacaciones ha terminado de arrancar.
