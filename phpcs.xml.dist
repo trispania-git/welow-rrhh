@@ -19,10 +19,12 @@
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<exclude-pattern>*/templates/emails/*</exclude-pattern>
 		<exclude-pattern>*/src/Frontend/templates/*</exclude-pattern>
+		<exclude-pattern>*/modules/*/templates/*</exclude-pattern>
 	</rule>
 	<rule ref="WordPress.WP.GlobalVariablesOverride">
 		<exclude-pattern>*/templates/emails/*</exclude-pattern>
 		<exclude-pattern>*/src/Frontend/templates/*</exclude-pattern>
+		<exclude-pattern>*/modules/*/templates/*</exclude-pattern>
 	</rule>
 
 	<arg name="extensions" value="php"/>

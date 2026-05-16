@@ -79,9 +79,12 @@ final class Frontend {
 			'welow-rrhh-frontend',
 			'welowRrhh',
 			array(
-				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'restUrl' => esc_url_raw( rest_url( 'welow-rrhh/v1/' ) ),
-				'nonce'   => wp_create_nonce( 'welow_rrhh_nonce' ),
+				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
+				'restUrl'   => esc_url_raw( rest_url( 'welow-rrhh/v1/' ) ),
+				// Nonce REST API estándar de WP (header X-WP-Nonce).
+				'restNonce' => wp_create_nonce( 'wp_rest' ),
+				// Nonce adicional para flujos admin-ajax si se usan más adelante.
+				'nonce'     => wp_create_nonce( 'welow_rrhh_nonce' ),
 			)
 		);
 	}
