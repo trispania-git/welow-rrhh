@@ -22,6 +22,10 @@ use Welow\RRHH\Departments\DepartmentRepository;
 use Welow\RRHH\Departments\DepartmentService;
 use Welow\RRHH\Employees\EmployeeRepository;
 use Welow\RRHH\Employees\EmployeeService;
+use Welow\RRHH\Exporters\CsvDriver;
+use Welow\RRHH\Exporters\Exporter;
+use Welow\RRHH\Exporters\PdfDriver;
+use Welow\RRHH\Exporters\Sources\EmployeesExportSource;
 use Welow\RRHH\Frontend\Dashboard;
 use Welow\RRHH\Frontend\Tabs\NotificationsTab;
 use Welow\RRHH\Frontend\Tabs\SummaryTab;
@@ -35,6 +39,8 @@ use Welow\RRHH\Notifications\Channels\InAppChannel;
 use Welow\RRHH\Notifications\Dispatcher;
 use Welow\RRHH\Notifications\EmailTemplateRenderer;
 use Welow\RRHH\Notifications\NotificationRepository;
+use Welow\RRHH\REST\Controllers\NotificationsController;
+use Welow\RRHH\REST\RestRoutes;
 use Welow\RRHH\Settings\CompanySettings;
 
 defined( 'ABSPATH' ) || exit;
@@ -115,6 +121,7 @@ final class Plugin {
 		$this->register_core_services();
 		$this->run_migrations();
 		$this->load_textdomain();
+		$this->boot_rest();
 		$this->boot_admin();
 		$this->boot_frontend();
 		$this->boot_modules();
@@ -299,6 +306,41 @@ final class Plugin {
 				return new \Welow\RRHH\Frontend\Frontend( $c->get( 'frontend.dashboard' ) );
 			}
 		);
+
+		// Exportador.
+		$this->container->set(
+			'exporters.exporter',
+			static function ( Container $c ): Exporter {
+				$drivers = array(
+					new CsvDriver(),
+					new PdfDriver(),
+				);
+				$sources = array(
+					new EmployeesExportSource(
+						$c->get( 'employees.repository' ),
+						$c->get( 'departments.repository' )
+					),
+				);
+				return new Exporter( $drivers, $sources, $c->get( 'audit.logger' ) );
+			}
+		);
+
+		// REST.
+		$this->container->set(
+			'rest.notifications_controller',
+			static function ( Container $c ): NotificationsController {
+				return new NotificationsController( $c->get( 'notifications.repository' ) );
+			}
+		);
+		$this->container->set(
+			'rest.routes',
+			static function ( Container $c ): RestRoutes {
+				$controllers = array(
+					$c->get( 'rest.notifications_controller' ),
+				);
+				return new RestRoutes( $controllers );
+			}
+		);
 	}
 
 	/**
@@ -340,6 +382,16 @@ final class Plugin {
 		}
 		$bootstrap = new AdminBootstrap( $this->container );
 		$bootstrap->register_hooks();
+	}
+
+	/**
+	 * Inicializa los endpoints REST (engancha rest_api_init).
+	 *
+	 * @return void
+	 */
+	private function boot_rest(): void {
+		$rest = $this->container->get( 'rest.routes' );
+		$rest->register_hooks();
 	}
 
 	/**
