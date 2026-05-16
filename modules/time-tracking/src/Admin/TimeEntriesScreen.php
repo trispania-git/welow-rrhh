@@ -10,9 +10,11 @@ declare( strict_types=1 );
 namespace Welow\RRHH\Modules\TimeTracking\Admin;
 
 use Welow\RRHH\Employees\EmployeeRepository;
+use Welow\RRHH\Exporters\CsvDriver;
 use Welow\RRHH\Modules\TimeTracking\Closure\MonthClosure;
 use Welow\RRHH\Modules\TimeTracking\Data\EventType;
 use Welow\RRHH\Modules\TimeTracking\Data\TimeEntry;
+use Welow\RRHH\Modules\TimeTracking\Exporters\MonthlyReport;
 use Welow\RRHH\Modules\TimeTracking\Service\TimeEntryService;
 use Welow\RRHH\Modules\TimeTracking\TimeTrackingCapabilities;
 
@@ -49,16 +51,25 @@ final class TimeEntriesScreen {
 	private MonthClosure $closure;
 
 	/**
+	 * Generador de reporte mensual.
+	 *
+	 * @var MonthlyReport
+	 */
+	private MonthlyReport $report;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param TimeEntryService   $service   Servicio.
 	 * @param EmployeeRepository $employees Repo empleados.
 	 * @param MonthClosure       $closure   Cierre.
+	 * @param MonthlyReport      $report    Reporte mensual.
 	 */
-	public function __construct( TimeEntryService $service, EmployeeRepository $employees, MonthClosure $closure ) {
+	public function __construct( TimeEntryService $service, EmployeeRepository $employees, MonthClosure $closure, MonthlyReport $report ) {
 		$this->service   = $service;
 		$this->employees = $employees;
 		$this->closure   = $closure;
+		$this->report    = $report;
 	}
 
 	/**
@@ -73,6 +84,10 @@ final class TimeEntriesScreen {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$action = isset( $_GET['action'] ) ? sanitize_key( (string) $_GET['action'] ) : '';
+		if ( 'export' === $action ) {
+			$this->handle_export();
+			return;
+		}
 		if ( 'edit' === $action ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$id    = isset( $_GET['id'] ) ? (int) $_GET['id'] : 0;
@@ -173,9 +188,38 @@ final class TimeEntriesScreen {
 	private function render_list(): void {
 		$table = new TimeEntriesListTable( $this->service->repository(), $this->employees, $this->closure );
 		$table->prepare_items();
+
+		// Botón "Exportar mes" sólo cuando hay un empleado filtrado.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$emp_id = isset( $_GET['emp'] ) ? (int) $_GET['emp'] : 0;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$from    = isset( $_GET['from'] ) ? sanitize_text_field( wp_unslash( (string) $_GET['from'] ) ) : '';
+		$from_dt = '' !== $from ? \DateTimeImmutable::createFromFormat( '!Y-m-d', $from ) : false;
+		if ( false === $from_dt ) {
+			$from_dt = new \DateTimeImmutable( 'now', wp_timezone() );
+			$from_dt = $from_dt->modify( 'first day of this month' );
+		}
+
+		$export_args_base = array(
+			'page'    => self::PAGE_SLUG,
+			'action'  => 'export',
+			'user_id' => $emp_id,
+			'year'    => (int) $from_dt->format( 'Y' ),
+			'month'   => (int) $from_dt->format( 'n' ),
+		);
+		$export_csv       = wp_nonce_url( add_query_arg( array_merge( $export_args_base, array( 'format' => 'csv' ) ), admin_url( 'admin.php' ) ), 'welow_rrhh_tt_export' );
+		$export_pdf       = wp_nonce_url( add_query_arg( array_merge( $export_args_base, array( 'format' => 'pdf' ) ), admin_url( 'admin.php' ) ), 'welow_rrhh_tt_export' );
 		?>
 		<div class="wrap">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Fichajes', 'welow-rrhh' ); ?></h1>
+			<?php if ( $emp_id > 0 ) : ?>
+				<a class="page-title-action" href="<?php echo esc_url( $export_pdf ); ?>"><?php esc_html_e( 'Exportar mes (PDF)', 'welow-rrhh' ); ?></a>
+				<a class="page-title-action" href="<?php echo esc_url( $export_csv ); ?>"><?php esc_html_e( 'Exportar mes (CSV)', 'welow-rrhh' ); ?></a>
+			<?php else : ?>
+				<span class="description" style="margin-left:8px;color:#777;">
+					<?php esc_html_e( 'Filtra por un empleado para habilitar la exportación mensual.', 'welow-rrhh' ); ?>
+				</span>
+			<?php endif; ?>
 			<hr class="wp-header-end">
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo esc_attr( self::PAGE_SLUG ); ?>" />
@@ -183,6 +227,92 @@ final class TimeEntriesScreen {
 			</form>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Handler de la descarga (action=export).
+	 *
+	 * @return void
+	 */
+	private function handle_export(): void {
+		check_admin_referer( 'welow_rrhh_tt_export' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$format = isset( $_GET['format'] ) ? sanitize_key( (string) $_GET['format'] ) : 'pdf';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$user_id = isset( $_GET['user_id'] ) ? (int) $_GET['user_id'] : 0;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$year = isset( $_GET['year'] ) ? (int) $_GET['year'] : (int) wp_date( 'Y' );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$month = isset( $_GET['month'] ) ? (int) $_GET['month'] : (int) wp_date( 'n' );
+
+		if ( $user_id <= 0 || $month < 1 || $month > 12 ) {
+			wp_die( esc_html__( 'Parámetros inválidos para la exportación.', 'welow-rrhh' ), '', array( 'response' => 400 ) );
+		}
+
+		// Permisos: VIEW_ALL ve cualquiera; VIEW_TEAM sólo su equipo o sí mismo.
+		$current = get_current_user_id();
+		$is_self = ( $user_id === $current );
+		if ( ! $is_self ) {
+			if ( ! current_user_can( TimeTrackingCapabilities::VIEW_ALL ) ) {
+				if ( ! current_user_can( TimeTrackingCapabilities::VIEW_TEAM ) ) {
+					wp_die( esc_html__( 'Sin permisos.', 'welow-rrhh' ), '', array( 'response' => 403 ) );
+				}
+				$emp = $this->employees->find_by_user_id( $user_id );
+				if ( null === $emp || $emp->manager_user_id !== $current ) {
+					wp_die( esc_html__( 'Sólo puedes exportar fichajes de los empleados de tu equipo.', 'welow-rrhh' ), '', array( 'response' => 403 ) );
+				}
+			}
+		}
+
+		$report = $this->report->build( $user_id, $year, $month );
+		$slug   = sprintf( 'fichajes-%04d-%02d-user%d', $year, $month, $user_id );
+
+		if ( 'pdf' === $format && class_exists( '\\Dompdf\\Dompdf' ) ) {
+			$html = $this->report->to_pdf_html( $report );
+			self::send_pdf( $html, $slug . '.pdf' );
+			return;
+		}
+
+		// Fallback CSV (también explícito si se pidió csv).
+		$table = $this->report->to_csv_table( $report );
+		$csv   = ( new CsvDriver() )->render( $table['headers'], $table['rows'], $slug );
+		self::send_bytes( $csv, $slug . '.csv', 'text/csv; charset=UTF-8' );
+	}
+
+	/**
+	 * Genera PDF con dompdf y lo descarga.
+	 *
+	 * @param string $html     HTML.
+	 * @param string $filename Nombre.
+	 * @return void
+	 */
+	private static function send_pdf( string $html, string $filename ): void {
+		$class  = '\\Dompdf\\Dompdf';
+		$dompdf = new $class();
+		$dompdf->loadHtml( $html, 'UTF-8' );
+		$dompdf->setPaper( 'A4', 'portrait' );
+		$dompdf->render();
+		$bytes = (string) $dompdf->output();
+		self::send_bytes( $bytes, $filename, 'application/pdf' );
+	}
+
+	/**
+	 * Envía bytes binarios con Content-Disposition attachment.
+	 *
+	 * @param string $bytes        Contenido.
+	 * @param string $filename     Nombre.
+	 * @param string $content_type MIME.
+	 * @return void
+	 */
+	private static function send_bytes( string $bytes, string $filename, string $content_type ): void {
+		nocache_headers();
+		header( 'Content-Type: ' . $content_type );
+		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
+		header( 'Content-Length: ' . strlen( $bytes ) );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $bytes;
+		exit;
 	}
 
 	/**

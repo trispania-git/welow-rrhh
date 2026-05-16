@@ -122,7 +122,8 @@ final class AdminBootstrap {
 			$this->entries_screen = new TimeEntriesScreen(
 				$this->container->get( 'time_tracking.service' ),
 				$this->container->get( 'employees.repository' ),
-				$this->container->get( 'time_tracking.month_closure' )
+				$this->container->get( 'time_tracking.month_closure' ),
+				$this->container->get( 'time_tracking.monthly_report' )
 			);
 		}
 		return $this->entries_screen;

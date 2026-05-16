@@ -19,6 +19,7 @@ use Welow\RRHH\Modules\AbstractModule;
 use Welow\RRHH\Modules\TimeTracking\Admin\AdminBootstrap as TimeTrackingAdmin;
 use Welow\RRHH\Modules\TimeTracking\Closure\ClosureGuard;
 use Welow\RRHH\Modules\TimeTracking\Closure\MonthClosure;
+use Welow\RRHH\Modules\TimeTracking\Exporters\MonthlyReport;
 use Welow\RRHH\Modules\TimeTracking\Frontend\MyTimeEntriesTab;
 use Welow\RRHH\Modules\TimeTracking\Frontend\PunchTab;
 use Welow\RRHH\Modules\TimeTracking\Policy\PunchGuard;
@@ -178,6 +179,19 @@ final class Module extends AbstractModule {
 			}
 		);
 		$container->get( 'time_tracking.closure_guard' )->register_hooks();
+
+		// Reporte mensual (9.E).
+		$container->set(
+			'time_tracking.monthly_report',
+			static function ( Container $c ): MonthlyReport {
+				return new MonthlyReport(
+					$c->get( 'time_tracking.repository' ),
+					$c->get( 'employees.repository' ),
+					$c->get( 'departments.repository' ),
+					$c->get( 'settings.company' )
+				);
+			}
+		);
 
 		// Admin del módulo (lista, edición, cierre de mes) — sólo cuando is_admin.
 		if ( is_admin() ) {
