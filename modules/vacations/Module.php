@@ -21,6 +21,8 @@ use Welow\RRHH\Modules\Vacations\Config\VacationYearsConfig;
 use Welow\RRHH\Modules\Vacations\Repository\VacationBalanceRepository;
 use Welow\RRHH\Modules\Vacations\Repository\VacationRequestRepository;
 use Welow\RRHH\Modules\Vacations\Schema\VacationsSchema;
+use Welow\RRHH\Modules\Vacations\Notifications\VacationNotifications;
+use Welow\RRHH\Modules\Vacations\Service\ApprovalService;
 use Welow\RRHH\Modules\Vacations\Service\BalanceCalculator;
 use Welow\RRHH\Modules\Vacations\Service\RequestService;
 
@@ -151,6 +153,31 @@ final class Module extends AbstractModule {
 				);
 			}
 		);
+
+		$container->set(
+			'vacations.approval_service',
+			static function ( Container $c ): ApprovalService {
+				return new ApprovalService(
+					$c->get( 'vacations.request_repository' ),
+					$c->get( 'vacations.balance_calculator' ),
+					$c->get( 'employees.repository' ),
+					$c->get( 'audit.logger' )
+				);
+			}
+		);
+
+		$container->set(
+			'vacations.notifications',
+			static function ( Container $c ): VacationNotifications {
+				return new VacationNotifications(
+					$c->get( 'notifications.dispatcher' ),
+					$c->get( 'vacations.approval_service' )
+				);
+			}
+		);
+
+		// Engancha los listeners de notificaciones a los actions del módulo.
+		$container->get( 'vacations.notifications' )->register_hooks();
 
 		/**
 		 * Disparado cuando el módulo Vacaciones ha terminado de arrancar.
