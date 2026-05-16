@@ -22,9 +22,11 @@ use Welow\RRHH\Modules\Vacations\Repository\VacationBalanceRepository;
 use Welow\RRHH\Modules\Vacations\Repository\VacationRequestRepository;
 use Welow\RRHH\Modules\Vacations\Schema\VacationsSchema;
 use Welow\RRHH\Modules\Vacations\Notifications\VacationNotifications;
+use Welow\RRHH\Modules\Vacations\REST\VacationsController;
 use Welow\RRHH\Modules\Vacations\Service\ApprovalService;
 use Welow\RRHH\Modules\Vacations\Service\BalanceCalculator;
 use Welow\RRHH\Modules\Vacations\Service\RequestService;
+use Welow\RRHH\Support\RateLimiter;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -178,6 +180,35 @@ final class Module extends AbstractModule {
 
 		// Engancha los listeners de notificaciones a los actions del módulo.
 		$container->get( 'vacations.notifications' )->register_hooks();
+
+		$container->set(
+			'vacations.rate_limiter_requests',
+			static function (): RateLimiter {
+				return new RateLimiter( 'vacation_request', 10, 60 );
+			}
+		);
+
+		$container->set(
+			'vacations.rest_controller',
+			static function ( Container $c ): VacationsController {
+				return new VacationsController(
+					$c->get( 'vacations.request_service' ),
+					$c->get( 'vacations.approval_service' ),
+					$c->get( 'vacations.balance_calculator' ),
+					$c->get( 'employees.repository' ),
+					$c->get( 'vacations.rate_limiter_requests' )
+				);
+			}
+		);
+
+		// Registra controller REST vía filtro del Core.
+		add_filter(
+			'welow_rrhh/rest/controllers',
+			static function ( array $controllers ) use ( $container ): array {
+				$controllers[] = $container->get( 'vacations.rest_controller' );
+				return $controllers;
+			}
+		);
 
 		/**
 		 * Disparado cuando el módulo Vacaciones ha terminado de arrancar.

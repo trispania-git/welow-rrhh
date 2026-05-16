@@ -25,8 +25,8 @@ use Welow\RRHH\Modules\TimeTracking\Frontend\PunchTab;
 use Welow\RRHH\Modules\TimeTracking\Policy\PunchGuard;
 use Welow\RRHH\Modules\TimeTracking\Policy\PunchPolicyResolver;
 use Welow\RRHH\Modules\TimeTracking\REST\PunchesController;
-use Welow\RRHH\Modules\TimeTracking\REST\RateLimiter;
 use Welow\RRHH\Modules\TimeTracking\Repository\TimeEntryRepository;
+use Welow\RRHH\Support\RateLimiter;
 use Welow\RRHH\Modules\TimeTracking\Schema\TimeTrackingSchema;
 use Welow\RRHH\Modules\TimeTracking\Service\TimeEntryService;
 

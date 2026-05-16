@@ -21,6 +21,7 @@ use Welow\RRHH\Modules\TimeTracking\Data\TimeEntry;
 use Welow\RRHH\Modules\TimeTracking\Service\TimeEntryService;
 use Welow\RRHH\Modules\TimeTracking\TimeTrackingCapabilities;
 use Welow\RRHH\REST\AbstractController;
+use Welow\RRHH\Support\RateLimiter;
 
 defined( 'ABSPATH' ) || exit;
 

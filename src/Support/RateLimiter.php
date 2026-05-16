@@ -1,16 +1,18 @@
 <?php
 /**
- * Rate limiter ligero por usuario, basado en transients (§12).
+ * Rate limiter ligero por (bucket, user_id), basado en transients (§12).
  *
- * Política: máx. N peticiones por ventana móvil de M segundos por
- * (namespace, user_id). No persiste históricos; sólo cuenta y caduca.
+ * Compartido por todos los controllers REST del plugin para imponer
+ * límites por usuario/endpoint sin requerir backend externo (Redis,
+ * Memcached). La ventana es de tipo "fixed window" — sencilla y
+ * suficiente para defensa básica anti-flood.
  *
- * @package Welow\RRHH\Modules\TimeTracking\REST
+ * @package Welow\RRHH\Support
  */
 
 declare( strict_types=1 );
 
-namespace Welow\RRHH\Modules\TimeTracking\REST;
+namespace Welow\RRHH\Support;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,17 +22,38 @@ defined( 'ABSPATH' ) || exit;
 final class RateLimiter {
 
 	/**
+	 * Slug del endpoint protegido (ej. 'punch', 'vacation_request').
+	 *
+	 * @var string
+	 */
+	private string $bucket;
+
+	/**
+	 * Peticiones permitidas en la ventana.
+	 *
+	 * @var int
+	 */
+	private int $max_requests;
+
+	/**
+	 * Ventana en segundos.
+	 *
+	 * @var int
+	 */
+	private int $window_seconds;
+
+	/**
 	 * Constructor.
 	 *
-	 * @param string $bucket         Slug del endpoint protegido (ej. 'punch').
+	 * @param string $bucket         Slug del endpoint protegido.
 	 * @param int    $max_requests   Peticiones permitidas en la ventana.
 	 * @param int    $window_seconds Ventana en segundos.
 	 */
-	public function __construct(
-		private string $bucket,
-		private int $max_requests = 10,
-		private int $window_seconds = 60
-	) {}
+	public function __construct( string $bucket, int $max_requests = 10, int $window_seconds = 60 ) {
+		$this->bucket         = $bucket;
+		$this->max_requests   = $max_requests;
+		$this->window_seconds = $window_seconds;
+	}
 
 	/**
 	 * Intenta consumir una petición.
@@ -49,7 +72,7 @@ final class RateLimiter {
 	}
 
 	/**
-	 * Resetea el contador (útil en tests / acciones admin).
+	 * Resetea el contador (útil en tests o acciones admin).
 	 *
 	 * @param int $user_id Usuario.
 	 * @return void
