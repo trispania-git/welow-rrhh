@@ -6,6 +6,9 @@
 	colors="true"
 	failOnRisky="true"
 	failOnWarning="true"
+	displayDetailsOnTestsThatTriggerWarnings="true"
+	displayDetailsOnTestsThatTriggerNotices="true"
+	displayDetailsOnTestsThatTriggerErrors="true"
 >
 	<testsuites>
 		<testsuite name="unit">
