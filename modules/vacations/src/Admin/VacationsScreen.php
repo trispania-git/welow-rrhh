@@ -278,6 +278,14 @@ final class VacationsScreen {
 	public function handle_post_save(): void {
 		check_admin_referer( self::SAVE_NONCE );
 
+		// Guard temprano: cualquier acción requiere al menos VIEW_TEAM o MANAGE_ANY.
+		// El service revalida con can_decide(), pero detenemos aquí a usuarios sin
+		// permisos básicos para no exponer códigos de error a su input.
+		if ( ! current_user_can( VacationsCapabilities::VIEW_TEAM )
+			&& ! current_user_can( VacationsCapabilities::MANAGE_ANY ) ) {
+			wp_die( esc_html__( 'No tienes permisos.', 'welow-rrhh' ), '', array( 'response' => 403 ) );
+		}
+
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$post = wp_unslash( $_POST );
 
@@ -290,10 +298,15 @@ final class VacationsScreen {
 
 		switch ( $op ) {
 			case 'approve':
-				$result = $this->approvals->approve( $id, $actor, $note );
-				break;
 			case 'reject':
-				$result = $this->approvals->reject( $id, $actor, $note );
+				if ( ! current_user_can( VacationsCapabilities::APPROVE_TEAM )
+					&& ! current_user_can( VacationsCapabilities::MANAGE_ANY ) ) {
+					$result = new \WP_Error( 'forbidden', __( 'No tienes permisos para decidir.', 'welow-rrhh' ) );
+					break;
+				}
+				$result = 'approve' === $op
+					? $this->approvals->approve( $id, $actor, $note )
+					: $this->approvals->reject( $id, $actor, $note );
 				break;
 			case 'cancel':
 				if ( ! current_user_can( VacationsCapabilities::MANAGE_ANY ) ) {

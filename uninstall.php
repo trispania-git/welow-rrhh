@@ -46,6 +46,26 @@ $welow_rrhh_table_basenames = class_exists( \Welow\RRHH\Database\Schema::class )
 		'welow_audit_log',
 	);
 
+// Tablas de los módulos (sólo si su Schema es cargable; si no, hardcoded
+// como salvaguarda para que el uninstall funcione sin autoload).
+if ( class_exists( \Welow\RRHH\Modules\TimeTracking\Schema\TimeTrackingSchema::class ) ) {
+	$welow_rrhh_table_basenames = array_merge(
+		$welow_rrhh_table_basenames,
+		\Welow\RRHH\Modules\TimeTracking\Schema\TimeTrackingSchema::table_basenames()
+	);
+} else {
+	$welow_rrhh_table_basenames[] = 'welow_time_entries';
+}
+if ( class_exists( \Welow\RRHH\Modules\Vacations\Schema\VacationsSchema::class ) ) {
+	$welow_rrhh_table_basenames = array_merge(
+		$welow_rrhh_table_basenames,
+		\Welow\RRHH\Modules\Vacations\Schema\VacationsSchema::table_basenames()
+	);
+} else {
+	$welow_rrhh_table_basenames[] = 'welow_vacation_requests';
+	$welow_rrhh_table_basenames[] = 'welow_vacation_balances';
+}
+
 foreach ( $welow_rrhh_table_basenames as $welow_rrhh_table_base ) {
 	$welow_rrhh_table = $wpdb->prefix . $welow_rrhh_table_base;
 	// Nombre de tabla controlado (no proviene de input externo); seguro concatenar.
@@ -54,7 +74,7 @@ foreach ( $welow_rrhh_table_basenames as $welow_rrhh_table_base ) {
 }
 unset( $welow_rrhh_table_basenames, $welow_rrhh_table_base, $welow_rrhh_table );
 
-// Roles y capabilities.
+// Roles y capabilities (Core + módulos).
 if ( class_exists( \Welow\RRHH\Roles\Capabilities::class ) ) {
 	\Welow\RRHH\Roles\Capabilities::uninstall();
 } else {
@@ -78,8 +98,17 @@ if ( class_exists( \Welow\RRHH\Roles\Capabilities::class ) ) {
 	unset( $welow_rrhh_administrator );
 }
 
-// Opciones del plugin.
+// Capabilities introducidas por los módulos.
+if ( class_exists( \Welow\RRHH\Modules\TimeTracking\TimeTrackingCapabilities::class ) ) {
+	\Welow\RRHH\Modules\TimeTracking\TimeTrackingCapabilities::uninstall();
+}
+if ( class_exists( \Welow\RRHH\Modules\Vacations\VacationsCapabilities::class ) ) {
+	\Welow\RRHH\Modules\Vacations\VacationsCapabilities::uninstall();
+}
+
+// Opciones del plugin (Core + módulos).
 foreach ( array(
+	// Core.
 	'welow_rrhh_version',
 	'welow_rrhh_db_version',
 	'welow_rrhh_active_modules',
@@ -87,6 +116,12 @@ foreach ( array(
 	'welow_rrhh_setup_progress',
 	'welow_rrhh_company_settings',
 	'welow_rrhh_remove_data_on_uninstall',
+	// Módulo Fichajes.
+	'welow_rrhh_time_tracking_db_version',
+	'welow_rrhh_time_tracking_closed_months',
+	// Módulo Vacaciones.
+	'welow_rrhh_vacations_db_version',
+	'welow_rrhh_vacation_years',
 ) as $welow_rrhh_option ) {
 	delete_option( $welow_rrhh_option );
 }
